@@ -45,7 +45,7 @@ for idx, file in enumerate(images):
     else:
         labels.append("third more sinister option")
     pics = plt.subplot(5,20,idx+1)
-    pics.imshow(img)
+    pics.imshow(img, "gray")
     pics.set_title(labels[idx])
     pics.axis('off')
 plt.tight_layout()
