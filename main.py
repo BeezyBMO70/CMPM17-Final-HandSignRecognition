@@ -49,10 +49,9 @@ dfa = df.to_numpy(dtype='float64') #i did this to make all values floats before 
 data = torch.tensor(dfa, dtype=torch.float) #become a tensor now
 #initalize training data
 
-all_imgs = [] #all of the actual images will go in here
-for img in images: 
-    all_imgs.append(Image.open("Fingers\\" + img)) # opening each individual image and appending into this list. i dont know if it will wokr but we will see
+all_imgs = [os.path.join("Fingers\\", img) for img in images] #all of the actual images will go in here ; updated so adding images to a list is more memory efficient
 
+#training data
 training_images = all_imgs[:15750]
 training_labels = data[:15750]
 
@@ -60,16 +59,46 @@ training_labels = data[:15750]
 testing_images = all_imgs[15750:]
 testing_labels = data[15750:]
 
+#transform sequences
+finger_transforms = v2.Compose([
+    v2.ToTensor(),
 
-class FingerData(Dataset): #fortnite is a class that inherits from Dataset. It's purpose is to help me with batching my data :3 I named it fortnite because its awesome.
-    def __init__(self, features, labels): #i could make it throw an error if input is not of type tensor but im the laziest mf ever so if it works it works
+    #helps to generalize hand size/positioning
+    v2.RandomRotation(degrees=[-180, 180]),
+    v2.RandomPerspective(distortion_scale=0.6, p=0.8),
+    v2.RandomApply([v2.RandomAffine(degrees=[0,0],translate=(0.3,0.3),scale=(0.5,1.5))], p=0.8),
+    #helps to minimize background noise and lead the model to focus on the hand details
+    v2.RandomApply([v2.GaussianBlur(kernel_size=(3,3), sigma=(0.1, 5.0))], p=0.5),
+    v2.RandomApply([v2.RandomCrop(size=(96,96))],p=0.5),
+    v2.RandomErasing(p=0.5, scale=(0.05,0.2), ratio=(0.3,3.3), value="random"),
+
+    v2.ToPILImage()
+])
+
+
+class FingerData(Dataset): 
+    def __init__(self, features, labels, transform=None): #Added transform parameter. Used to pass transforms to only the testing data.
         self.features = features
         self.labels = labels
+        self.transform = transform
     def __len__(self):
         return len(self.features) #how long - the tensors should be of equal length anyway
     def __getitem__(self, index):
-        #TRANSFORMS GO HERE
-        transforms = v2.compose([])
-        return(self.features[index], self.labels[index]) #value where
+        img = self.features[index]
+        label = self.labels[index]
+        if self.transform != None: #checks if transform is passed or not
+            img = self.transform(img) 
+        return (img, label) #returns augmented image and the corresponding label
 
 
+
+#WILL USE THIS DATALOADER TO TRAIN DATA
+finger_train = FingerData(training_images, training_labels, transform=finger_transforms)
+finger_dl_train = DataLoader(finger_train, batch_size=64, shuffle=True)
+
+
+#WILL USE THIS DATALOADER TO TEST DATA
+finger_test = FingerData(testing_images, testing_labels) #don't define transform, we want to keep original images when testing.
+finger_dl_test = DataLoader(finger_test, batch_size=64, shuffle=True)
+
+print("no errors! yippie")

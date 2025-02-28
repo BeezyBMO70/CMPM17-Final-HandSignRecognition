@@ -1,4 +1,11 @@
-'''
+import os
+import re
+from PIL import Image
+import matplotlib.pyplot as plt
+
+images = os.listdir("Fingers")
+labels = []
+
 images100 = os.listdir("Fingers")[:100]  #READ ME  os.listdir pulls the first 100 file names from the local folder "Fingers". if your version of the data set is not both called "Fingers" and within the CMPM17-FINAL.... folder, this wont work. Hit me up if you run into any trouble!
 values = [0,0,0,0,0,0,0,0,0,0,0,0,0] # - to keep track of class distribution, in order matching order below.
 for idx, file in enumerate(images100):
@@ -49,4 +56,3 @@ for idx, file in enumerate(images100):
 plt.tight_layout()
 plt.show()
 print(values)
-'''
