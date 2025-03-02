@@ -64,18 +64,16 @@ finger_transforms = v2.Compose([
     v2.ToTensor(),
     #helps to generalize hand size/positioning
     v2.RandomRotation(degrees=[-180, 180]),
-    v2.RandomPerspective(distortion_scale=0.6, p=0.8),
-    v2.RandomApply([v2.RandomAffine(degrees=[0,0],translate=(0.3,0.3),scale=(0.5,1.5))], p=0.8),
+    v2.RandomPerspective(distortion_scale=0.5, p=0.8),
+    v2.RandomApply([v2.RandomAffine(degrees=[0,0],translate=(0.1,0.1),scale=(0.9,1.5))], p=0.8),
     #helps to minimize background noise and lead the model to focus on the hand details
     v2.RandomApply([v2.GaussianBlur(kernel_size=(3,3), sigma=(0.1, 5.0))], p=0.5),
     v2.RandomApply([v2.RandomCrop(size=(96,96))],p=0.5),
-    v2.RandomErasing(p=0.5, scale=(0.05,0.2), ratio=(0.3,3.3), value="random"),
     v2.Resize((128,128))
 ])
 test_transform = v2.Compose([  #things get kind of weird here in order to not apply transformations to the testing images but trust the process
     v2.ToTensor()
 ])
-
 class FingerData(Dataset): 
     def __init__(self, features, labels, transform=None): #Added transform parameter. Used to pass transforms to only the training data.
         self.features = features
@@ -100,6 +98,19 @@ finger_dl_train = DataLoader(finger_train, batch_size=64, shuffle=True)
 finger_test = FingerData(testing_images, testing_labels) #don't define transform, we want to keep original images when testing.
 finger_dl_test = DataLoader(finger_test, batch_size=64, shuffle=True)
 
+'''
+to_pil = v2.ToPILImage()
+
+#Used to observe augmented/test images
+for batch in finger_dl_train:
+    images, labels = batch
+    # Display each image in the batch
+    for img_tensor in images:
+        pil_img = to_pil(img_tensor)
+        plt.imshow(pil_img, "grey")
+        plt.axis("off")
+        plt.show()
+'''
 for batch in finger_dl_train: # training data loop
     images, labels = batch
     for i in range(len(images)):
@@ -109,5 +120,3 @@ for batch in finger_dl_test: #testing data loop
     images, labels = batch
     for i in range(len(images)):
         print("IMAGE TENSOR: " + str(images[i].shape) + ", LABEL TENSOR: " + str(labels[i].shape))
-
-
