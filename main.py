@@ -62,7 +62,6 @@ testing_labels = data[15750:]
 #transform sequences
 finger_transforms = v2.Compose([
     v2.ToTensor(),
-
     #helps to generalize hand size/positioning
     v2.RandomRotation(degrees=[-180, 180]),
     v2.RandomPerspective(distortion_scale=0.6, p=0.8),
@@ -71,34 +70,44 @@ finger_transforms = v2.Compose([
     v2.RandomApply([v2.GaussianBlur(kernel_size=(3,3), sigma=(0.1, 5.0))], p=0.5),
     v2.RandomApply([v2.RandomCrop(size=(96,96))],p=0.5),
     v2.RandomErasing(p=0.5, scale=(0.05,0.2), ratio=(0.3,3.3), value="random"),
-
-    v2.ToPILImage()
+    v2.Resize((128,128))
+])
+test_transform = v2.Compose([  #things get kind of weird here in order to not apply transformations to the testing images but trust the process
+    v2.ToTensor()
 ])
 
-
 class FingerData(Dataset): 
-    def __init__(self, features, labels, transform=None): #Added transform parameter. Used to pass transforms to only the testing data.
+    def __init__(self, features, labels, transform=None): #Added transform parameter. Used to pass transforms to only the training data.
         self.features = features
         self.labels = labels
         self.transform = transform
     def __len__(self):
         return len(self.features) #how long - the tensors should be of equal length anyway
     def __getitem__(self, index):
-        img = self.features[index]
+        img = Image.open(self.features[index])
         label = self.labels[index]
         if self.transform != None: #checks if transform is passed or not
-            img = self.transform(img) 
+            img = self.transform(img)
+        else:
+            img = test_transform(img) #testing images still needs to be a tensor
         return (img, label) #returns augmented image and the corresponding label
-
-
 
 #WILL USE THIS DATALOADER TO TRAIN DATA
 finger_train = FingerData(training_images, training_labels, transform=finger_transforms)
 finger_dl_train = DataLoader(finger_train, batch_size=64, shuffle=True)
 
-
 #WILL USE THIS DATALOADER TO TEST DATA
 finger_test = FingerData(testing_images, testing_labels) #don't define transform, we want to keep original images when testing.
 finger_dl_test = DataLoader(finger_test, batch_size=64, shuffle=True)
 
-print("no errors! yippie")
+for batch in finger_dl_train: # training data loop
+    images, labels = batch
+    for i in range(len(images)):
+        print("IMAGE TENSOR: " + str(images[i].shape) + ", LABEL TENSOR: " + str(labels[i].shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
+
+for batch in finger_dl_test: #testing data loop
+    images, labels = batch
+    for i in range(len(images)):
+        print("IMAGE TENSOR: " + str(images[i].shape) + ", LABEL TENSOR: " + str(labels[i].shape))
+
+
