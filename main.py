@@ -68,7 +68,9 @@ finger_transforms = v2.Compose([
     v2.RandomApply([v2.RandomAffine(degrees=[0,0],translate=(0.1,0.1),scale=(0.9,1.5))], p=0.8),
     #helps to minimize background noise and lead the model to focus on the hand details
     v2.RandomApply([v2.GaussianBlur(kernel_size=(3,3), sigma=(0.1, 5.0))], p=0.5),
-    v2.RandomApply([v2.RandomCrop(size=(96,96))],p=0.5),
+    v2.RandomApply([v2.RandomCrop(size=(96,96))],p=0.3),
+    #generalizes brightness
+    v2.RandomApply([v2.ColorJitter(brightness=(0.1,1.5), contrast=(0.5))],p=0.8),
     v2.Resize((128,128))
 ])
 test_transform = v2.Compose([  #things get kind of weird here in order to not apply transformations to the testing images but trust the process
