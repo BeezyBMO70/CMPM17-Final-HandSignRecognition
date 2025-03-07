@@ -48,7 +48,6 @@ df = pd.get_dummies(df, columns=["vals"]) #one hot encoding the column
 dfa = df.to_numpy(dtype='float64') #i did this to make all values floats before putting it into a tensor
 data = torch.tensor(dfa, dtype=torch.float) #become a tensor now
 
-
 all_imgs = [os.path.join("Fingers\\", img) for img in images] #all of the actual images will go in here ; updated so adding images to a list is more memory efficient
 
 #training data
@@ -111,7 +110,7 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
         self.layer6 = nn.Conv2d(32,32, kernel_size=3, padding=1)
         self.layer7 = nn.Conv2d(32,32, kernel_size=3, padding=1)
         self.layer8 = nn.Conv2d(32,32, kernel_size=3, padding=1)
-        self.layer9 = nn.Linear(1,12)
+        self.layer9 = nn.Linear(524288,12)
     
     def forward(self, input):
         partial = self.layer1(input)
@@ -146,13 +145,6 @@ finger_dl_train = DataLoader(finger_train, batch_size=64, shuffle=True)
 finger_test = FingerData(testing_images, testing_labels) #don't define transform, we want to keep original images when testing.
 finger_dl_test = DataLoader(finger_test, batch_size=64, shuffle=True)
 
-#le model
-
-model = MyModel()
-#loss fn/optimizer initalization
-
-lossfn = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=.001)
 '''
 to_pil = v2.ToPILImage()
 
@@ -166,12 +158,32 @@ for batch in finger_dl_train:
         plt.axis("off")
         plt.show()
 '''
-for batch in finger_dl_train: # training data loop
-    images, labels = batch
-    for i in range(len(images)):
-        print("IMAGE TENSOR: " + str(images[i].shape) + ", LABEL TENSOR: " + str(labels[i].shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
+#le model
 
-for batch in finger_dl_test: #testing data loop
-    images, labels = batch
-    for i in range(len(images)):
-        print("IMAGE TENSOR: " + str(images[i].shape) + ", LABEL TENSOR: " + str(labels[i].shape))
+model = MyModel()
+#loss fn/optimizer initalization
+
+lossfn = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=.001)
+
+NUM_EPOCHS = 100
+
+#training loop
+for i in range(NUM_EPOCHS):
+    for batch in finger_dl_train: 
+        images, labels = batch
+        pred = model(images)
+        print(str(pred.shape),str(labels.shape))
+        #loss = lossfn(pred, labels)
+        #loss.backward()
+        #optimizer.step()
+        #optimizer.zero_grad()
+    #print("epoch loss:", loss)
+
+print("final loss for training model:", loss)
+
+#testing loop
+for images, labels in finger_dl_test: 
+    pred = model(images)
+    loss_test = lossfn(pred, labels)
+print("Loss for test model:", loss_test)
