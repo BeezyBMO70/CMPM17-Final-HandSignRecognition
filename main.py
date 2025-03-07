@@ -47,7 +47,7 @@ df = pd.DataFrame(values, list(range(0,len(labels)))) # making this into a dataf
 df = pd.get_dummies(df, columns=["vals"]) #one hot encoding the column
 dfa = df.to_numpy(dtype='float64') #i did this to make all values floats before putting it into a tensor
 data = torch.tensor(dfa, dtype=torch.float) #become a tensor now
-#initalize training data
+
 
 all_imgs = [os.path.join("Fingers\\", img) for img in images] #all of the actual images will go in here ; updated so adding images to a list is more memory efficient
 
@@ -56,8 +56,11 @@ training_images = all_imgs[:15750]
 training_labels = data[:15750]
 
 #testing data
-testing_images = all_imgs[15750:]
-testing_labels = data[15750:]
+testing_images = all_imgs[15750:18375]
+testing_labels = data[15750:18375]
+
+validation_images = all_imgs[18375:]
+validation_labels = data[18375:]
 
 #transform sequences
 finger_transforms = v2.Compose([
@@ -92,6 +95,49 @@ class FingerData(Dataset):
             img = test_transform(img) #testing images still needs to be a tensor
         return (img, label) #returns augmented image and the corresponding label
 
+class MyModel(nn.Module): #our ml model class, inherits from some class idk the specifics of :3
+
+    def __init__(self):
+        super().__init__()
+        self.activation = nn.Sigmoid() 
+        self.activation2 = nn.ReLU() 
+        self.softmax = nn.Softmax()
+        self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.layer1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
+        self.layer2 = nn.Conv2d(32,32, kernel_size=3, padding=1)
+        self.layer3 = nn.Conv2d(32,32, kernel_size=3, padding=1) #2 layers are NOT enough for what we are trying to do
+        self.layer4 = nn.Conv2d(32,32, kernel_size=3, padding=1)
+        self.layer5 = nn.Conv2d(32,32, kernel_size=3, padding=1)
+        self.layer6 = nn.Conv2d(32,32, kernel_size=3, padding=1)
+        self.layer7 = nn.Conv2d(32,32, kernel_size=3, padding=1)
+        self.layer8 = nn.Conv2d(32,32, kernel_size=3, padding=1)
+        self.layer9 = nn.Linear(1,12)
+    
+    def forward(self, input):
+        partial = self.layer1(input)
+        partial = self.activation2(partial) 
+        partial = self.layer2(partial)
+        partial = self.activation2(partial)  
+        partial = self.layer3(partial)
+        partial = self.activation2(partial)
+        partial = self.maxpool(partial)
+        partial = self.layer4(partial)
+        partial = self.activation2(partial)
+        partial = self.layer5(partial)
+        partial = self.activation2(partial)
+        partial = self.maxpool(partial)
+        partial = self.layer6(partial)
+        partial = self.activation2(partial)
+        partial = self.layer7(partial)
+        partial = self.activation2(partial)
+        partial = self.maxpool(partial)
+        partial = self.layer8(partial)
+        partial = self.activation2(partial)
+        partial  = torch.flatten(partial)
+        output = self.layer9(partial)#output
+        output = self.softmax(output)
+        return output # returns output 
+    
 #WILL USE THIS DATALOADER TO TRAIN DATA
 finger_train = FingerData(training_images, training_labels, transform=finger_transforms)
 finger_dl_train = DataLoader(finger_train, batch_size=64, shuffle=True)
@@ -100,6 +146,13 @@ finger_dl_train = DataLoader(finger_train, batch_size=64, shuffle=True)
 finger_test = FingerData(testing_images, testing_labels) #don't define transform, we want to keep original images when testing.
 finger_dl_test = DataLoader(finger_test, batch_size=64, shuffle=True)
 
+#le model
+
+model = MyModel()
+#loss fn/optimizer initalization
+
+lossfn = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=.001)
 '''
 to_pil = v2.ToPILImage()
 
