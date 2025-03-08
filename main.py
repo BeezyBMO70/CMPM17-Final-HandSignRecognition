@@ -202,7 +202,8 @@ for epoch in range(20):
     
     avg_val_loss = val_loss/len(finger_dl_val)
 
-    print("validation saved! epoch: ", epoch)    
+    print("validation saved! epoch: ", epoch+1)
+    #adds a datapoint of    
     wandb.log({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss})
 
 print("final loss for training model:", loss)
