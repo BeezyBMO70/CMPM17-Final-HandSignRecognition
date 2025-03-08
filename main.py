@@ -180,7 +180,7 @@ for i in range(NUM_EPOCHS):
         #optimizer.zero_grad()
     #print("epoch loss:", loss)
 
-print("final loss for training model:", loss)
+#print("final loss for training model:", loss)
 
 #testing loop
 for images, labels in finger_dl_test: 
