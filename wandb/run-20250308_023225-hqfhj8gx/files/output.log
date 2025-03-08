@@ -1,0 +1,66 @@
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py:1736: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  return self._call_impl(*args, **kwargs)
+now validating
+validation saved! epoch:  0
+starting new batching
+now validating
+validation saved! epoch:  1
+starting new batching
+now validating
+validation saved! epoch:  2
+starting new batching
+now validating
+validation saved! epoch:  3
+starting new batching
+now validating
+validation saved! epoch:  4
+starting new batching
+now validating
+validation saved! epoch:  5
+starting new batching
+now validating
+validation saved! epoch:  6
+starting new batching
+now validating
+validation saved! epoch:  7
+starting new batching
+now validating
+validation saved! epoch:  8
+starting new batching
+now validating
+validation saved! epoch:  9
+starting new batching
+now validating
+validation saved! epoch:  10
+starting new batching
+now validating
+validation saved! epoch:  11
+starting new batching
+now validating
+validation saved! epoch:  12
+starting new batching
+now validating
+validation saved! epoch:  13
+starting new batching
+now validating
+validation saved! epoch:  14
+starting new batching
+now validating
+validation saved! epoch:  15
+starting new batching
+now validating
+validation saved! epoch:  16
+starting new batching
+now validating
+validation saved! epoch:  17
+starting new batching
+now validating
+validation saved! epoch:  18
+starting new batching
+now validating
+validation saved! epoch:  19
+final loss for training model: tensor(2.4858, grad_fn=<DivBackward1>)

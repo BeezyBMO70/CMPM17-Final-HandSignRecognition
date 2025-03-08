@@ -14,7 +14,7 @@ import wandb
 
 images = os.listdir("Fingers")
 labels = [] # a list that will contain all of the labels of our inputs by index. i might run into trouble when I have to put this into the dataloader but I will think of a solution when i get there
-#run = wandb.init(project="Hand Detector CMPM17 final", name="like initial testing or whatever")
+run = wandb.init(project="Hand Detector CMPM17 Final", name="first_test")
 
 for image in images:
     if re.search("_0R", image): #possibly the most INEFFECIENT solution possible but i might think of something better if i wish upon a shooting star
@@ -136,7 +136,7 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
         partial = self.maxpool(partial)
         partial = self.layer8(partial)
         partial = self.activation2(partial)
-        partial  = torch.flatten(partial)
+        partial  = torch.flatten(partial, start_dim=1)
         output = self.layer9(partial)#output
         output = self.softmax(output)
         return output # returns output 
@@ -149,6 +149,10 @@ finger_dl_train = DataLoader(finger_train, batch_size=64, shuffle=True)
 finger_test = FingerData(testing_images, testing_labels) #don't define transform, we want to keep original images when testing.
 finger_dl_test = DataLoader(finger_test, batch_size=64, shuffle=True)
 
+#VALIDATION
+finger_val = FingerData(validation_images, validation_labels)
+finger_dl_val = DataLoader(finger_val, batch_size=64, shuffle=True)
+
 #le model
 
 model = MyModel()
@@ -158,9 +162,8 @@ model = MyModel()
 lossfn = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=.001)
 '''
-to_pil = v2.ToPILImage()
-
 #Used to observe augmented/test images
+to_pil = v2.ToPILImage()
 for batch in finger_dl_train:
     images, labels = batch
     # Display each image in the batch
@@ -170,21 +173,39 @@ for batch in finger_dl_train:
         plt.axis("off")
         plt.show()
 '''
+
+
+print("training in progress...")
 for epoch in range(20):
+    model.train()
+    train_loss = 0.0
+    print("starting new batching")
     for batch in finger_dl_train: # training data loop
         images, labels = batch
-        for i in range(len(images)):
-            pred = model(images[i])
-            #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels[i].shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
-            loss = lossfn(pred, labels[i])
-            loss.backward()
-            optimizer.step()
-            optimizer.zero_grad()
+        pred = model(images)
+        #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels[i].shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
+        loss = lossfn(pred, labels)
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad()
+        train_loss += loss.item()
+    print("now validating")
+    avg_train_loss = train_loss/len(finger_dl_train)
+    val_loss = 0.0
 
-<<<<<<< HEAD
-#print("final loss for training model:", loss)
-=======
->>>>>>> refs/remotes/origin/main
+    #validation
+    with torch.no_grad():
+        for images, labels in finger_dl_val:
+            val_pred=model(images)
+            val_loss = lossfn(val_pred, labels)
+            val_loss += loss.item()
+    
+    avg_val_loss = val_loss/len(finger_dl_val)
+
+    print("validation saved! epoch: ", epoch)    
+    wandb.log({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss})
+
+print("final loss for training model:", loss)
 
 '''for batch in finger_dl_test: #testing data loop
     images, labels = batch

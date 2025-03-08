@@ -1,0 +1,18 @@
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py:1736: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  return self._call_impl(*args, **kwargs)
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 183, in <module>
+    optimizer.step()
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\optim\optimizer.py", line 472, in wrapper
+    with torch.autograd.profiler.record_function(profile_name):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\autograd\profiler.py", line 733, in __enter__
+    self.record = torch.ops.profiler._record_function_enter_new(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\_ops.py", line 1116, in __call__
+    return self._op(*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
