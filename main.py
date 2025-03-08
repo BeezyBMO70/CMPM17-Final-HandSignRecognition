@@ -10,9 +10,11 @@ from PIL import Image
 from torchvision.transforms import v2
 import os #added in order to allow us to open our local image folder
 import re # regex my beloved -  READ ME - let me know if you want me to explain whats going on with this library
+import wandb
 
 images = os.listdir("Fingers")
 labels = [] # a list that will contain all of the labels of our inputs by index. i might run into trouble when I have to put this into the dataloader but I will think of a solution when i get there
+#run = wandb.init(project="Hand Detector CMPM17 final", name="like initial testing or whatever")
 
 for image in images:
     if re.search("_0R", image): #possibly the most INEFFECIENT solution possible but i might think of something better if i wish upon a shooting star
@@ -93,6 +95,8 @@ class FingerData(Dataset):
         else:
             img = test_transform(img) #testing images still needs to be a tensor
         return (img, label) #returns augmented image and the corresponding label
+    
+filters = 32
 
 class MyModel(nn.Module): #our ml model class, inherits from some class idk the specifics of :3
 
@@ -102,15 +106,15 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
         self.activation2 = nn.ReLU() 
         self.softmax = nn.Softmax()
         self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.layer1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
-        self.layer2 = nn.Conv2d(32,32, kernel_size=3, padding=1)
-        self.layer3 = nn.Conv2d(32,32, kernel_size=3, padding=1) #2 layers are NOT enough for what we are trying to do
-        self.layer4 = nn.Conv2d(32,32, kernel_size=3, padding=1)
-        self.layer5 = nn.Conv2d(32,32, kernel_size=3, padding=1)
-        self.layer6 = nn.Conv2d(32,32, kernel_size=3, padding=1)
-        self.layer7 = nn.Conv2d(32,32, kernel_size=3, padding=1)
-        self.layer8 = nn.Conv2d(32,32, kernel_size=3, padding=1)
-        self.layer9 = nn.Linear(524288,12)
+        self.layer1 = nn.Conv2d(1, filters, kernel_size=3, padding=1)
+        self.layer2 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
+        self.layer3 = nn.Conv2d(filters,filters, kernel_size=3, padding=1) #2 layers are NOT enough for what we are trying to do
+        self.layer4 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
+        self.layer5 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
+        self.layer6 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
+        self.layer7 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
+        self.layer8 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
+        self.layer9 = nn.Linear(filters * (16**2),12)
     
     def forward(self, input):
         partial = self.layer1(input)
@@ -145,6 +149,14 @@ finger_dl_train = DataLoader(finger_train, batch_size=64, shuffle=True)
 finger_test = FingerData(testing_images, testing_labels) #don't define transform, we want to keep original images when testing.
 finger_dl_test = DataLoader(finger_test, batch_size=64, shuffle=True)
 
+#le model
+
+model = MyModel()
+
+#loss fn/optimizer initalization
+
+lossfn = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=.001)
 '''
 to_pil = v2.ToPILImage()
 
@@ -158,32 +170,23 @@ for batch in finger_dl_train:
         plt.axis("off")
         plt.show()
 '''
-#le model
-
-model = MyModel()
-#loss fn/optimizer initalization
-
-lossfn = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=.001)
-
-NUM_EPOCHS = 100
-
-#training loop
-for i in range(NUM_EPOCHS):
-    for batch in finger_dl_train: 
+for epoch in range(20):
+    for batch in finger_dl_train: # training data loop
         images, labels = batch
-        pred = model(images)
-        print(str(pred.shape),str(labels.shape))
-        #loss = lossfn(pred, labels)
-        #loss.backward()
-        #optimizer.step()
-        #optimizer.zero_grad()
-    #print("epoch loss:", loss)
+        for i in range(len(images)):
+            pred = model(images[i])
+            #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels[i].shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
+            loss = lossfn(pred, labels[i])
+            loss.backward()
+            optimizer.step()
+            optimizer.zero_grad()
 
+<<<<<<< HEAD
 #print("final loss for training model:", loss)
+=======
+>>>>>>> refs/remotes/origin/main
 
-#testing loop
-for images, labels in finger_dl_test: 
-    pred = model(images)
-    loss_test = lossfn(pred, labels)
-print("Loss for test model:", loss_test)
+'''for batch in finger_dl_test: #testing data loop
+    images, labels = batch
+    for i in range(len(images)):
+        print("IMAGE TENSOR: " + str(images[i].shape) + ", LABEL TENSOR: " + str(labels[i].shape))'''
