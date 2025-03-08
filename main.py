@@ -50,7 +50,6 @@ df = pd.get_dummies(df, columns=["vals"]) #one hot encoding the column
 dfa = df.to_numpy(dtype='float64') #i did this to make all values floats before putting it into a tensor
 data = torch.tensor(dfa, dtype=torch.float) #become a tensor now
 
-
 all_imgs = [os.path.join("Fingers\\", img) for img in images] #all of the actual images will go in here ; updated so adding images to a list is more memory efficient
 
 #training data
