@@ -1,0 +1,31 @@
+{
+  "os":  "Windows-11-10.0.26100-SP0",
+  "python":  "CPython 3.12.8",
+  "startedAt":  "2025-03-09T00:33:23.396064Z",
+  "program":  "c:\\Users\\brand\\OneDrive\\Documents\\CMPM17-ML\\CMPM17-Final-HandSignRecognition\\main.py",
+  "codePath":  "main.py",
+  "git":  {
+    "remote":  "https://github.com/BeezyBMO70/CMPM17-Final-HandSignRecognition.git",
+    "commit":  "7b387d26a67735a30bbf2028e8d28cc04c423288"
+  },
+  "email":  "bwbow@ucsc.edu",
+  "root":  "C:\\Users\\brand\\OneDrive\\Documents\\CMPM17-ML\\CMPM17-Final-HandSignRecognition",
+  "host":  "Brandon-Pav",
+  "executable":  "C:\\Users\\brand\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "codePathLocal":  "main.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "511027703808",
+      "used":  "182229479424"
+    }
+  },
+  "memory":  {
+    "total":  "16474595328"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  }
+}

@@ -1,0 +1,60 @@
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py:1736: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  return self._call_impl(*args, **kwargs)
+tensor(2.4847, grad_fn=<DivBackward1>)
+tensor(2.4845, grad_fn=<DivBackward1>)
+tensor(2.4818, grad_fn=<DivBackward1>)
+tensor(2.4800, grad_fn=<DivBackward1>)
+tensor(2.4949, grad_fn=<DivBackward1>)
+tensor(2.4794, grad_fn=<DivBackward1>)
+tensor(2.4857, grad_fn=<DivBackward1>)
+tensor(2.4891, grad_fn=<DivBackward1>)
+tensor(2.4894, grad_fn=<DivBackward1>)
+tensor(2.4956, grad_fn=<DivBackward1>)
+tensor(2.4844, grad_fn=<DivBackward1>)
+tensor(2.4847, grad_fn=<DivBackward1>)
+tensor(2.4894, grad_fn=<DivBackward1>)
+tensor(2.4902, grad_fn=<DivBackward1>)
+tensor(2.4864, grad_fn=<DivBackward1>)
+tensor(2.4880, grad_fn=<DivBackward1>)
+tensor(2.4845, grad_fn=<DivBackward1>)
+tensor(2.4876, grad_fn=<DivBackward1>)
+tensor(2.4840, grad_fn=<DivBackward1>)
+tensor(2.4879, grad_fn=<DivBackward1>)
+tensor(2.4837, grad_fn=<DivBackward1>)
+tensor(2.4864, grad_fn=<DivBackward1>)
+tensor(2.4853, grad_fn=<DivBackward1>)
+tensor(2.4877, grad_fn=<DivBackward1>)
+tensor(2.4846, grad_fn=<DivBackward1>)
+tensor(2.4856, grad_fn=<DivBackward1>)
+tensor(2.4851, grad_fn=<DivBackward1>)
+tensor(2.4854, grad_fn=<DivBackward1>)
+Traceback (most recent call last):
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 185, in <module>
+    pred = model(images)
+           ^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 124, in forward
+    partial = self.layer3(partial)
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\conv.py", line 554, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\conv.py", line 549, in _conv_forward
+    return F.conv2d(
+           ^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,16 @@
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py:1736: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  return self._call_impl(*args, **kwargs)
+train loss : 2.4849953651428223
+train loss : 2.4845967292785645
+train loss : 2.485624313354492
+train loss : 2.4834892749786377
+train loss : 2.4828603267669678
+train loss : 2.486478567123413
+train loss : 2.4868481159210205
+train loss : 2.487762928009033
+train loss : 2.4798097610473633
+train loss : 2.485628128051758

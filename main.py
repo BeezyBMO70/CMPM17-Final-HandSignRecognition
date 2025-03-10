@@ -138,7 +138,7 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
         partial = self.activation2(partial)
         partial  = torch.flatten(partial, start_dim=1)
         output = self.layer9(partial)#output
-        output = self.softmax(output)
+        #output = self.softmax(output)
         return output # returns output 
     
 #WILL USE THIS DATALOADER TO TRAIN DATA
@@ -159,8 +159,8 @@ model = MyModel()
 
 #loss fn/optimizer initalization
 
-lossfn = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=.001)
+lossfn = nn.BCEWithLogitsLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=.001, weight_decay=.001)
 '''
 #Used to observe augmented/test images
 to_pil = v2.ToPILImage()
@@ -179,36 +179,38 @@ print("training in progress...")
 for epoch in range(20):
     model.train()
     train_loss = 0.0
+    val_loss = 0.0
     print("starting new batching")
     for batch in finger_dl_train: # training data loop
         images, labels = batch
         pred = model(images)
-        #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels[i].shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
+        print(pred)
+        #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels.shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
         loss = lossfn(pred, labels)
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
         train_loss += loss.item()
-    print("now validating")
+        with torch.no_grad():
+            for images, labels in finger_dl_val:
+                val_pred=model(images)
+                val_loss = lossfn(val_pred, labels)
+                val_loss += loss.item()
     avg_train_loss = train_loss/len(finger_dl_train)
-    val_loss = 0.0
-
-    #validation
-    with torch.no_grad():
-        for images, labels in finger_dl_val:
-            val_pred=model(images)
-            val_loss = lossfn(val_pred, labels)
-            val_loss += loss.item()
-    
     avg_val_loss = val_loss/len(finger_dl_val)
-
     print("validation saved! epoch: ", epoch+1)
     #adds a datapoint of    
     wandb.log({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss})
-
 print("final loss for training model:", loss)
 
-'''for batch in finger_dl_test: #testing data loop
-    images, labels = batch
-    for i in range(len(images)):
-        print("IMAGE TENSOR: " + str(images[i].shape) + ", LABEL TENSOR: " + str(labels[i].shape))'''
+for epoch in range(20):
+    model.eval()
+    test_loss = 0.0
+    print("starting new batching")
+    for batch in finger_dl_test:
+        images, labels = batch
+        pred = model(images)
+        loss = lossfn(pred, labels)
+        print("test loss : " + str(loss.item()))
+        test_loss += loss.item()
+    avg_test_loss = test_loss/len(finger_dl_test)

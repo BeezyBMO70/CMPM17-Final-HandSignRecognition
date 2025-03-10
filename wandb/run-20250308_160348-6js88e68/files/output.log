@@ -1,0 +1,31 @@
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py:1736: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  return self._call_impl(*args, **kwargs)
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+IMAGE TENSOR: torch.Size([64, 12]), LABEL TENSOR: torch.Size([64, 12])
+Traceback (most recent call last):
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 188, in <module>
+    loss.backward()
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\autograd\__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\autograd\graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
