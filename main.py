@@ -14,7 +14,12 @@ import wandb
 
 images = os.listdir("Fingers")
 labels = [] # a list that will contain all of the labels of our inputs by index. i might run into trouble when I have to put this into the dataloader but I will think of a solution when i get there
-run = wandb.init(project="Hand Detector CMPM17 Final", name="first_test")
+run = wandb.init(project="Hand Detector CMPM17 Final", name="testing_updated_model")
+
+# Check if CUDA (GPU) is available; otherwise, use CPU
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")  # Debugging to confirm GPU usage
+
 
 for image in images:
     if re.search("_0R", image): #possibly the most INEFFECIENT solution possible but i might think of something better if i wish upon a shooting star
@@ -155,7 +160,7 @@ finger_dl_val = DataLoader(finger_val, batch_size=64, shuffle=True)
 
 #le model
 
-model = MyModel()
+model = MyModel().to(device)
 
 #loss fn/optimizer initalization
 
@@ -176,41 +181,50 @@ for batch in finger_dl_train:
 
 
 print("training in progress...")
-for epoch in range(20):
+for epoch in range(5):
     model.train()
     train_loss = 0.0
     val_loss = 0.0
     print("starting new batching")
     for batch in finger_dl_train: # training data loop
         images, labels = batch
+        images, labels = images.to(device), labels.to(device)
         pred = model(images)
-        print(pred)
         #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels.shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
         loss = lossfn(pred, labels)
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
         train_loss += loss.item()
+        #validation loop
         with torch.no_grad():
             for images, labels in finger_dl_val:
+                images, labels = images.to(device), labels.to(device)
                 val_pred=model(images)
-                val_loss = lossfn(val_pred, labels)
+                loss = lossfn(val_pred, labels)
                 val_loss += loss.item()
+
     avg_train_loss = train_loss/len(finger_dl_train)
     avg_val_loss = val_loss/len(finger_dl_val)
     print("validation saved! epoch: ", epoch+1)
-    #adds a datapoint of    
+    #adds a datapoint of training and validation loss, along with epoch
     wandb.log({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss})
+
 print("final loss for training model:", loss)
 
+#testing data loop
 for epoch in range(20):
     model.eval()
     test_loss = 0.0
-    print("starting new batching")
-    for batch in finger_dl_test:
-        images, labels = batch
+    print("starting new batching for testing. epoch: ", epoch+1)
+    for images, labels in finger_dl_test:
+        images, labels = images.to(device), labels.to(device)
         pred = model(images)
         loss = lossfn(pred, labels)
-        print("test loss : " + str(loss.item()))
         test_loss += loss.item()
     avg_test_loss = test_loss/len(finger_dl_test)
+    #records average test loss for every epoch
+    print("testing loss saved!")
+    wandb.log({"test loss": avg_test_loss})
+
+print("model finished running! congrats on waiting this long")

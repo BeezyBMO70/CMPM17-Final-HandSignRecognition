@@ -1,0 +1,35 @@
+Using device: cuda
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+validation saved! epoch:  1
+starting new batching
+validation saved! epoch:  2
+starting new batching
+validation saved! epoch:  3
+starting new batching
+validation saved! epoch:  4
+starting new batching
+validation saved! epoch:  5
+final loss for training model: tensor(0.2959, device='cuda:0')
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
+starting new batching for testing
