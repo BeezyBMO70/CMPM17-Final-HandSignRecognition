@@ -1,0 +1,27 @@
+{"time":"2025-03-11T16:40:51.4139212-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\evche\\OneDrive\\Desktop\\UCSC_Freshman\\CMPM17-ML\\CMPM17-Final-HandSignRecognition\\wandb\\run-20250311_164051-kggm7wx4\\logs\\debug-core.log"}
+{"time":"2025-03-11T16:40:51.5364139-07:00","level":"INFO","msg":"created new stream","id":"kggm7wx4"}
+{"time":"2025-03-11T16:40:51.5364139-07:00","level":"INFO","msg":"stream: started","id":"kggm7wx4"}
+{"time":"2025-03-11T16:40:51.5364139-07:00","level":"INFO","msg":"sender: started","stream_id":"kggm7wx4"}
+{"time":"2025-03-11T16:40:51.5364139-07:00","level":"INFO","msg":"handler: started","stream_id":"kggm7wx4"}
+{"time":"2025-03-11T16:40:51.5364139-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"kggm7wx4"}
+{"time":"2025-03-11T16:40:51.9607036-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-11T16:58:22.7782332-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": write tcp 169.233.153.196:53104->35.186.228.49:443: wsasend: An established connection was aborted by the software in your host machine."}
+{"time":"2025-03-11T17:09:21.3763013-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/echen134-university-of-california/Hand%20Detector%20CMPM17%20Final/kggm7wx4/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:09:21.3763013-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:09:21.3903814-07:00","level":"WARN","msg":"sender: taking a long time","seconds":657.7300979,"work":"WorkRecord(*service_go_proto.Request_StopStatus); Control(local:true  mailbox_slot:\"nlhd8vv4g3sy\"  connection_id:\"127.0.0.1:53101\")"}
+{"time":"2025-03-11T17:09:23.5725654-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/echen134-university-of-california/Hand%20Detector%20CMPM17%20Final/kggm7wx4/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:09:36.6471294-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:09:36.6471294-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/echen134-university-of-california/Hand%20Detector%20CMPM17%20Final/kggm7wx4/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:09:56.0198164-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/echen134-university-of-california/Hand%20Detector%20CMPM17%20Final/kggm7wx4/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:09:56.0198164-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:10:12.1424422-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:10:12.342552-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/echen134-university-of-california/Hand%20Detector%20CMPM17%20Final/kggm7wx4/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-11T17:10:44.9326308-07:00","level":"INFO","msg":"sender: succeeded after taking longer than expected","seconds":742.1549027,"work":"WorkRecord(*service_go_proto.Request_StopStatus); Control(local:true  mailbox_slot:\"nlhd8vv4g3sy\"  connection_id:\"127.0.0.1:53101\")"}
+{"time":"2025-03-11T17:22:22.1678311-07:00","level":"INFO","msg":"stream: closing","id":"kggm7wx4"}
+{"time":"2025-03-11T17:22:22.1678311-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-11T17:22:22.1686985-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-11T17:22:23.0283414-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-11T17:22:23.1581373-07:00","level":"INFO","msg":"handler: closed","stream_id":"kggm7wx4"}
+{"time":"2025-03-11T17:22:23.1581373-07:00","level":"INFO","msg":"sender: closed","stream_id":"kggm7wx4"}
+{"time":"2025-03-11T17:22:23.1581373-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"kggm7wx4"}
+{"time":"2025-03-11T17:22:23.1586419-07:00","level":"INFO","msg":"stream: closed","id":"kggm7wx4"}

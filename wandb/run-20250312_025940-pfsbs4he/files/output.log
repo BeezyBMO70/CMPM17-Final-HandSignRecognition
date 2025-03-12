@@ -1,0 +1,86 @@
+Using device: cuda
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+Epoch 1, Train Accuracy: 8.1460% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 2, Train Accuracy: 8.2286% , Validation Accuracy: 8.1860%
+starting new batching
+Epoch 3, Train Accuracy: 8.1270% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 4, Train Accuracy: 8.0000% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 5, Train Accuracy: 8.2603% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 6, Train Accuracy: 8.3619% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 7, Train Accuracy: 8.1651% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 8, Train Accuracy: 8.4508% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 9, Train Accuracy: 8.2603% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 10, Train Accuracy: 8.4762% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 11, Train Accuracy: 8.2159% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 12, Train Accuracy: 8.4317% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 13, Train Accuracy: 8.1079% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 14, Train Accuracy: 8.4698% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 15, Train Accuracy: 8.0000% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 16, Train Accuracy: 8.3492% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 17, Train Accuracy: 8.3492% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 18, Train Accuracy: 8.4000% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 19, Train Accuracy: 8.2667% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 20, Train Accuracy: 8.3238% , Validation Accuracy: 7.9070%
+final loss for training model: tensor(2.4874, device='cuda:0')
+starting new batching for testing. epoch:  1
+Epoch 1, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  2
+Epoch 2, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  3
+Epoch 3, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  4
+Epoch 4, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  5
+Epoch 5, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  6
+Epoch 6, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  7
+Epoch 7, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  8
+Epoch 8, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  9
+Epoch 9, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  10
+Epoch 10, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  11
+Epoch 11, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  12
+Epoch 12, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  13
+Epoch 13, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  14
+Epoch 14, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  15
+Epoch 15, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  16
+Epoch 16, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  17
+Epoch 17, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  18
+Epoch 18, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  19
+Epoch 19, Test Accuracy: 8.0381%
+starting new batching for testing. epoch:  20
+Epoch 20, Test Accuracy: 8.0381%
+model finished running! congrats on waiting this long

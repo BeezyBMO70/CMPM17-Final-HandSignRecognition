@@ -14,7 +14,7 @@ import wandb
 
 images = os.listdir("Fingers")
 labels = [] # a list that will contain all of the labels of our inputs by index. i might run into trouble when I have to put this into the dataloader but I will think of a solution when i get there
-run = wandb.init(project="Hand Detector CMPM17 Final", name="testing_updated_model")
+run = wandb.init(project="Hand Detector CMPM17 Final", name="model_with_accuracy2")
 
 # Check if CUDA (GPU) is available; otherwise, use CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -164,7 +164,7 @@ model = MyModel().to(device)
 
 #loss fn/optimizer initalization
 
-lossfn = nn.BCEWithLogitsLoss()
+lossfn = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=.001, weight_decay=.001)
 '''
 #Used to observe augmented/test images
@@ -181,14 +181,16 @@ for batch in finger_dl_train:
 
 
 print("training in progress...")
-for epoch in range(5):
+for epoch in range(20):
     model.train()
     train_loss = 0.0
-    val_loss = 0.0
+    train_correct = 0.0
+    train_total = 0.0
     print("starting new batching")
     for batch in finger_dl_train: # training data loop
         images, labels = batch
         images, labels = images.to(device), labels.to(device)
+        labels = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
         pred = model(images)
         #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels.shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
         loss = lossfn(pred, labels)
@@ -196,19 +198,38 @@ for epoch in range(5):
         optimizer.step()
         optimizer.zero_grad()
         train_loss += loss.item()
-        #validation loop
-        with torch.no_grad():
-            for images, labels in finger_dl_val:
-                images, labels = images.to(device), labels.to(device)
-                val_pred=model(images)
-                loss = lossfn(val_pred, labels)
-                val_loss += loss.item()
+        #calculating accuracy
+        pred_fingers = torch.argmax(pred, dim=1)
+        train_correct += (pred_fingers == labels).sum().item()
+        train_total += labels.size(0)
 
+    #end batch, calculate testing loss + accuracy
     avg_train_loss = train_loss/len(finger_dl_train)
+    train_accuracy = train_correct/train_total*100
+
+    #validation loop
+    val_loss = 0.0
+    val_correct = 0.0
+    val_total = 0.0 
+    with torch.no_grad():
+        for images, labels in finger_dl_val:
+            images, labels = images.to(device), labels.to(device)
+            labels=labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
+            val_pred=model(images)
+            loss = lossfn(val_pred, labels)
+            val_loss += loss.item()
+            #calculating accuracy
+            pred_fingers_val = torch.argmax(val_pred, dim=1)
+            val_correct += (pred_fingers_val == labels).sum().item()
+            val_total += labels.size(0)
+
+    #end batch, calculate validation loss + accuracy
     avg_val_loss = val_loss/len(finger_dl_val)
-    print("validation saved! epoch: ", epoch+1)
-    #adds a datapoint of training and validation loss, along with epoch
-    wandb.log({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss})
+    val_accuracy = val_correct/val_total*100
+    
+    #adds a datapoint of training and validation loss, along with epoch and accuracies
+    print(f"Epoch {epoch+1}, Train Accuracy: {train_accuracy:.4f}% , Validation Accuracy: {val_accuracy:.4f}%")
+    wandb.log({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss, "train_acc":train_accuracy , "val_acc":val_accuracy})
 
 print("final loss for training model:", loss)
 
@@ -216,15 +237,25 @@ print("final loss for training model:", loss)
 for epoch in range(20):
     model.eval()
     test_loss = 0.0
+    test_correct = 0.0
+    test_total = 0
     print("starting new batching for testing. epoch: ", epoch+1)
     for images, labels in finger_dl_test:
         images, labels = images.to(device), labels.to(device)
+        labels = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
         pred = model(images)
         loss = lossfn(pred, labels)
         test_loss += loss.item()
+        #compute accuracy
+        pred_fingers_test = torch.argmax(pred, dim=1)
+        test_correct += (pred_fingers_test == labels).sum().item()
+        test_total += labels.size(0)
+
     avg_test_loss = test_loss/len(finger_dl_test)
-    #records average test loss for every epoch
-    print("testing loss saved!")
-    wandb.log({"test loss": avg_test_loss})
+    test_accuracy = test_correct/test_total*100
+
+    #records test loss + accuracy
+    print(f"Epoch {epoch + 1}, Test Accuracy: {test_accuracy:.4f}%")
+    wandb.log({"test loss": avg_test_loss, "test_acc": test_accuracy})
 
 print("model finished running! congrats on waiting this long")
