@@ -1,0 +1,44 @@
+Using device: cpu
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+tensor(0.6941, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.6500, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.5964, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.5319, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.4598, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.3856, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.3197, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.2874, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.3170, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.3381, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.3332, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.3167, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.3061, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+Traceback (most recent call last):
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 192, in <module>
+    val_pred=model(images)
+             ^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 142, in forward
+    partial = self.layer8(partial)
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\conv.py", line 554, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\conv.py", line 549, in _conv_forward
+    return F.conv2d(
+           ^^^^^^^^^
+KeyboardInterrupt

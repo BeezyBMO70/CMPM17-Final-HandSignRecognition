@@ -1,0 +1,15 @@
+{"time":"2025-03-11T16:53:42.2010159-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\brand\\OneDrive\\Documents\\CMPM17-ML\\CMPM17-Final-HandSignRecognition\\wandb\\run-20250311_165342-zmb8jxui\\logs\\debug-core.log"}
+{"time":"2025-03-11T16:53:42.3298644-07:00","level":"INFO","msg":"created new stream","id":"zmb8jxui"}
+{"time":"2025-03-11T16:53:42.3298644-07:00","level":"INFO","msg":"stream: started","id":"zmb8jxui"}
+{"time":"2025-03-11T16:53:42.3298644-07:00","level":"INFO","msg":"sender: started","stream_id":"zmb8jxui"}
+{"time":"2025-03-11T16:53:42.3298644-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"zmb8jxui"}
+{"time":"2025-03-11T16:53:42.3298644-07:00","level":"INFO","msg":"handler: started","stream_id":"zmb8jxui"}
+{"time":"2025-03-11T16:53:42.5434462-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-11T16:54:12.7360556-07:00","level":"INFO","msg":"stream: closing","id":"zmb8jxui"}
+{"time":"2025-03-11T16:54:12.7360556-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-11T16:54:12.7371711-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-11T16:54:13.3542913-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-11T16:54:13.4694364-07:00","level":"INFO","msg":"handler: closed","stream_id":"zmb8jxui"}
+{"time":"2025-03-11T16:54:13.4699526-07:00","level":"INFO","msg":"sender: closed","stream_id":"zmb8jxui"}
+{"time":"2025-03-11T16:54:13.4699526-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"zmb8jxui"}
+{"time":"2025-03-11T16:54:13.4703137-07:00","level":"INFO","msg":"stream: closed","id":"zmb8jxui"}

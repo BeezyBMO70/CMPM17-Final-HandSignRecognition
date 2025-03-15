@@ -1,0 +1,74 @@
+Using device: cpu
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+tensor(0.6880, grad_fn=<BinaryCrossEntropyWithLogitsBackward0>)
+tensor(0.6372)
+tensor(0.6373)
+tensor(0.6376)
+tensor(0.6374)
+tensor(0.6372)
+tensor(0.6371)
+tensor(0.6370)
+tensor(0.6375)
+tensor(0.6374)
+tensor(0.6368)
+tensor(0.6371)
+tensor(0.6372)
+tensor(0.6369)
+tensor(0.6372)
+tensor(0.6371)
+tensor(0.6374)
+tensor(0.6376)
+tensor(0.6373)
+tensor(0.6373)
+tensor(0.6371)
+tensor(0.6373)
+tensor(0.6371)
+tensor(0.6369)
+tensor(0.6373)
+tensor(0.6371)
+tensor(0.6373)
+tensor(0.6371)
+tensor(0.6371)
+tensor(0.6370)
+tensor(0.6377)
+tensor(0.6369)
+tensor(0.6375)
+tensor(0.6368)
+tensor(0.6373)
+tensor(0.6373)
+tensor(0.6369)
+tensor(0.6372)
+tensor(0.6372)
+tensor(0.6368)
+Traceback (most recent call last):
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 193, in <module>
+    val_pred=model(images)
+             ^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 131, in forward
+    partial = self.maxpool(partial)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\pooling.py", line 213, in forward
+    return F.max_pool2d(
+           ^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\_jit_internal.py", line 624, in fn
+    return if_false(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\functional.py", line 830, in _max_pool2d
+    return torch.max_pool2d(input, kernel_size, stride, padding, dilation, ceil_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

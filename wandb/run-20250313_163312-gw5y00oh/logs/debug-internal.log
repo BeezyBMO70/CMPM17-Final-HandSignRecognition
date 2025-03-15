@@ -1,0 +1,7 @@
+{"time":"2025-03-13T16:33:13.0827475-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\brand\\OneDrive\\Documents\\CMPM17-ML\\CMPM17-Final-HandSignRecognition\\wandb\\run-20250313_163312-gw5y00oh\\logs\\debug-core.log"}
+{"time":"2025-03-13T16:33:13.2078102-07:00","level":"INFO","msg":"created new stream","id":"gw5y00oh"}
+{"time":"2025-03-13T16:33:13.2078102-07:00","level":"INFO","msg":"stream: started","id":"gw5y00oh"}
+{"time":"2025-03-13T16:33:13.2078102-07:00","level":"INFO","msg":"handler: started","stream_id":"gw5y00oh"}
+{"time":"2025-03-13T16:33:13.2078102-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"gw5y00oh"}
+{"time":"2025-03-13T16:33:13.2078102-07:00","level":"INFO","msg":"sender: started","stream_id":"gw5y00oh"}
+{"time":"2025-03-13T16:33:13.434525-07:00","level":"INFO","msg":"Starting system monitor"}

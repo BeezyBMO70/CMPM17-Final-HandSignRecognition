@@ -1,0 +1,53 @@
+2025-03-11 16:08:00,136 INFO    MainThread:16492 [wandb_setup.py:_flush():67] Current SDK version is 0.19.8
+2025-03-11 16:08:00,136 INFO    MainThread:16492 [wandb_setup.py:_flush():67] Configure stats pid to 16492
+2025-03-11 16:08:00,136 INFO    MainThread:16492 [wandb_setup.py:_flush():67] Loading settings from C:\Users\brand\.config\wandb\settings
+2025-03-11 16:08:00,136 INFO    MainThread:16492 [wandb_setup.py:_flush():67] Loading settings from C:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\wandb\settings
+2025-03-11 16:08:00,136 INFO    MainThread:16492 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-03-11 16:08:00,136 INFO    MainThread:16492 [wandb_init.py:setup_run_log_directory():647] Logging user logs to C:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\wandb\run-20250311_160800-vk4nb6p2\logs\debug.log
+2025-03-11 16:08:00,146 INFO    MainThread:16492 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to C:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\wandb\run-20250311_160800-vk4nb6p2\logs\debug-internal.log
+2025-03-11 16:08:00,146 INFO    MainThread:16492 [wandb_init.py:init():761] calling init triggers
+2025-03-11 16:08:00,146 INFO    MainThread:16492 [wandb_init.py:init():766] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-03-11 16:08:00,146 INFO    MainThread:16492 [wandb_init.py:init():784] starting backend
+2025-03-11 16:08:00,146 INFO    MainThread:16492 [wandb_init.py:init():788] sending inform_init request
+2025-03-11 16:08:00,215 INFO    MainThread:16492 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=spawn, using: spawn
+2025-03-11 16:08:00,215 INFO    MainThread:16492 [wandb_init.py:init():798] backend started and connected
+2025-03-11 16:08:00,217 INFO    MainThread:16492 [wandb_init.py:init():891] updated telemetry
+2025-03-11 16:08:00,284 INFO    MainThread:16492 [wandb_init.py:init():915] communicating run to backend with 90.0 second timeout
+2025-03-11 16:08:00,693 INFO    MainThread:16492 [wandb_init.py:init():990] starting run threads in backend
+2025-03-11 16:08:00,827 WARNING MainThread:16492 [wandb_init.py:init():1472] interrupted
+Traceback (most recent call last):
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\wandb_init.py", line 1468, in init
+    return wi.init(run_settings, run_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\wandb_init.py", line 1031, in init
+    run._on_start()
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\wandb_run.py", line 2410, in _on_start
+    self._backend.interface.publish_python_packages(working_set())
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\interface\interface.py", line 343, in publish_python_packages
+    for pkg in working_set:
+               ^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\util.py", line 1937, in working_set
+    yield InstalledDistribution(key=d.metadata["Name"], version=d.version)
+                                                                ^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\importlib\metadata\__init__.py", line 467, in version
+    return self.metadata['Version']
+           ^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\importlib\metadata\__init__.py", line 444, in metadata
+    self.read_text('METADATA')
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\importlib\metadata\__init__.py", line 819, in read_text
+    return self._path.joinpath(filename).read_text(encoding='utf-8')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 717, in joinpath
+    return self.with_segments(self, *pathsegments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 385, in with_segments
+    return type(self)(*pathsegments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1162, in __init__
+    super().__init__(*args)
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 358, in __init__
+    def __init__(self, *args):
+    
+KeyboardInterrupt
+2025-03-11 16:08:01,699 INFO    MsgRouterThr:16492 [mailbox.py:close():129] Closing mailbox, abandoning 0 handles.

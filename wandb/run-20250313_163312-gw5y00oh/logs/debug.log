@@ -1,0 +1,52 @@
+2025-03-13 16:33:12,996 INFO    MainThread:24792 [wandb_setup.py:_flush():67] Current SDK version is 0.19.8
+2025-03-13 16:33:12,996 INFO    MainThread:24792 [wandb_setup.py:_flush():67] Configure stats pid to 24792
+2025-03-13 16:33:12,998 INFO    MainThread:24792 [wandb_setup.py:_flush():67] Loading settings from C:\Users\brand\.config\wandb\settings
+2025-03-13 16:33:12,998 INFO    MainThread:24792 [wandb_setup.py:_flush():67] Loading settings from C:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\wandb\settings
+2025-03-13 16:33:12,998 INFO    MainThread:24792 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-03-13 16:33:12,998 INFO    MainThread:24792 [wandb_init.py:setup_run_log_directory():647] Logging user logs to C:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\wandb\run-20250313_163312-gw5y00oh\logs\debug.log
+2025-03-13 16:33:13,004 INFO    MainThread:24792 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to C:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\wandb\run-20250313_163312-gw5y00oh\logs\debug-internal.log
+2025-03-13 16:33:13,004 INFO    MainThread:24792 [wandb_init.py:init():761] calling init triggers
+2025-03-13 16:33:13,004 INFO    MainThread:24792 [wandb_init.py:init():766] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-03-13 16:33:13,004 INFO    MainThread:24792 [wandb_init.py:init():784] starting backend
+2025-03-13 16:33:13,004 INFO    MainThread:24792 [wandb_init.py:init():788] sending inform_init request
+2025-03-13 16:33:13,079 INFO    MainThread:24792 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=spawn, using: spawn
+2025-03-13 16:33:13,079 INFO    MainThread:24792 [wandb_init.py:init():798] backend started and connected
+2025-03-13 16:33:13,080 INFO    MainThread:24792 [wandb_init.py:init():891] updated telemetry
+2025-03-13 16:33:13,150 INFO    MainThread:24792 [wandb_init.py:init():915] communicating run to backend with 90.0 second timeout
+2025-03-13 16:33:13,428 INFO    MainThread:24792 [wandb_init.py:init():990] starting run threads in backend
+2025-03-13 16:33:13,562 INFO    MainThread:24792 [wandb_run.py:_console_start():2375] atexit reg
+2025-03-13 16:33:13,563 INFO    MainThread:24792 [wandb_run.py:_redirect():2227] redirect: wrap_raw
+2025-03-13 16:33:13,563 INFO    MainThread:24792 [wandb_run.py:_redirect():2292] Wrapping output streams.
+2025-03-13 16:33:13,563 INFO    MainThread:24792 [wandb_run.py:_redirect():2315] Redirects installed.
+2025-03-13 16:33:13,568 INFO    MainThread:24792 [wandb_init.py:init():1032] run started, returning control to user process
+2025-03-13 16:36:11,157 WARNING MsgRouterThr:24792 [router.py:message_loop():63] message_loop has been closed
+Traceback (most recent call last):
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 208, in _read_packet_bytes
+    data = self._sock.recv(self._bufsize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 10055] An operation on a socket could not be performed because the system lacked sufficient buffer space or because a queue was full
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\interface\router_sock.py", line 27, in _read_message
+    return self._sock_client.read_server_response(timeout=1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 235, in read_server_response
+    data = self._read_packet_bytes(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 212, in _read_packet_bytes
+    raise SockClientClosedError from e
+wandb.sdk.lib.sock_client.SockClientClosedError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\interface\router.py", line 56, in message_loop
+    msg = self._read_message()
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\interface\router_sock.py", line 29, in _read_message
+    raise MessageRouterClosedError from e
+wandb.sdk.interface.router.MessageRouterClosedError
+2025-03-13 16:36:18,188 INFO    MsgRouterThr:24792 [mailbox.py:close():129] Closing mailbox, abandoning 3 handles.

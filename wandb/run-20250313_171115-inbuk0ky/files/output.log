@@ -1,0 +1,15 @@
+Using device: cpu
+C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+Traceback (most recent call last):
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 157, in <module>
+    model = MyModel().to(device)
+            ^^^^^^^^^
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 118, in __init__
+    self.layer9 = nn.Linear(((16**2)*64),((16**2)*64)/8)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\brand\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\linear.py", line 106, in __init__
+    torch.empty((out_features, in_features), **factory_kwargs)
+TypeError: empty() received an invalid combination of arguments - got (tuple, dtype=NoneType, device=NoneType), but expected one of:
+ * (tuple of ints size, *, tuple of names names, torch.memory_format memory_format = None, torch.dtype dtype = None, torch.layout layout = None, torch.device device = None, bool pin_memory = False, bool requires_grad = False)
+ * (tuple of ints size, *, torch.memory_format memory_format = None, Tensor out = None, torch.dtype dtype = None, torch.layout layout = None, torch.device device = None, bool pin_memory = False, bool requires_grad = False)

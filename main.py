@@ -11,6 +11,7 @@ from torchvision.transforms import v2
 import os #added in order to allow us to open our local image folder
 import re # regex my beloved -  READ ME - let me know if you want me to explain whats going on with this library
 import wandb
+import torch.nn.functional as F
 
 images = os.listdir("Fingers")
 labels = [] # a list that will contain all of the labels of our inputs by index. i might run into trouble when I have to put this into the dataloader but I will think of a solution when i get there
@@ -85,6 +86,34 @@ finger_transforms = v2.Compose([
 test_transform = v2.Compose([  #things get kind of weird here in order to not apply transformations to the testing images but trust the process
     v2.ToTensor()
 ])
+
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=1, gamma=2, reduction='mean'):
+        """
+        :param alpha: Weighting factor for class imbalance (set to 1 if not needed)
+        :param gamma: Focusing parameter (higher = more focus on hard examples)
+        :param reduction: 'mean' (default) or 'sum' for loss aggregation
+        """
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+        self.reduction = reduction
+
+    def forward(self, inputs, targets):
+        """
+        :param inputs: Predictions (logits before softmax for multi-class, probability for binary)
+        :param targets: Ground truth labels
+        """
+        ce_loss = F.cross_entropy(inputs, targets, reduction="none")  # Compute standard CE loss
+        p_t = torch.exp(-ce_loss)  # Get softmax probabilities
+        focal_loss = self.alpha * (1 - p_t) ** self.gamma * ce_loss  # Apply focal weighting
+
+        if self.reduction == 'mean':
+            return focal_loss.mean()
+        elif self.reduction == 'sum':
+            return focal_loss.sum()
+        return focal_loss
+    
 class FingerData(Dataset): 
     def __init__(self, features, labels, transform=None): #Added transform parameter. Used to pass transforms to only the training data.
         self.features = features
@@ -111,38 +140,35 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
         self.activation2 = nn.ReLU() 
         self.softmax = nn.Softmax()
         self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.layer1 = nn.Conv2d(1, filters, kernel_size=3, padding=1)
-        self.layer2 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
-        self.layer3 = nn.Conv2d(filters,filters, kernel_size=3, padding=1) #2 layers are NOT enough for what we are trying to do
-        self.layer4 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
-        self.layer5 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
-        self.layer6 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
-        self.layer7 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
-        self.layer8 = nn.Conv2d(filters,filters, kernel_size=3, padding=1)
-        self.layer9 = nn.Linear(filters * (16**2),12)
+        self.layer1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
+        self.layer2 = nn.Conv2d(32,64, kernel_size=3, padding=1)
+        self.layer3 = nn.Conv2d(64,64, kernel_size=3, padding=1) #2 layers are NOT enough for what we are trying to do
+        self.layer4 = nn.Conv2d(64,64, kernel_size=3, padding=1)
+        self.layer9 = nn.Linear(16384,2048)
+        self.layer10 = nn.Linear(2048,1024)
+        self.layer11 = nn.Linear(1024,512)
+        self.layer12 = nn.Linear(512,12)
     
     def forward(self, input):
         partial = self.layer1(input)
         partial = self.activation2(partial) 
         partial = self.layer2(partial)
-        partial = self.activation2(partial)  
+        partial = self.activation2(partial)
+        partial = self.maxpool(partial)
         partial = self.layer3(partial)
         partial = self.activation2(partial)
         partial = self.maxpool(partial)
         partial = self.layer4(partial)
         partial = self.activation2(partial)
-        partial = self.layer5(partial)
-        partial = self.activation2(partial)
         partial = self.maxpool(partial)
-        partial = self.layer6(partial)
-        partial = self.activation2(partial)
-        partial = self.layer7(partial)
-        partial = self.activation2(partial)
-        partial = self.maxpool(partial)
-        partial = self.layer8(partial)
-        partial = self.activation2(partial)
         partial  = torch.flatten(partial, start_dim=1)
-        output = self.layer9(partial)#output
+        partial = self.layer9(partial)
+        partial = self.activation2(partial)
+        partial = self.layer10(partial)
+        partial = self.activation2(partial)
+        partial = self.layer11(partial)
+        partial = self.activation2(partial)
+        output = self.layer12(partial)
         #output = self.softmax(output)
         return output # returns output 
     
@@ -164,10 +190,12 @@ model = MyModel().to(device)
 
 #loss fn/optimizer initalization
 
-lossfn = nn.CrossEntropyLoss()
+lossfn = FocalLoss(alpha=0.25, gamma=2.0)
 optimizer = torch.optim.Adam(model.parameters(), lr=.001, weight_decay=.001)
-'''
+
 #Used to observe augmented/test images
+
+'''
 to_pil = v2.ToPILImage()
 for batch in finger_dl_train:
     images, labels = batch
@@ -194,6 +222,7 @@ for epoch in range(20):
         pred = model(images)
         #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels.shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
         loss = lossfn(pred, labels)
+        print(loss)
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
@@ -245,6 +274,7 @@ for epoch in range(20):
         labels = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
         pred = model(images)
         loss = lossfn(pred, labels)
+        
         test_loss += loss.item()
         #compute accuracy
         pred_fingers_test = torch.argmax(pred, dim=1)
