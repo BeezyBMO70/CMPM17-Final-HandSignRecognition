@@ -1,0 +1,102 @@
+Using device: cuda
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+tensor(0.5240, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5218, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5215, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5206, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5202, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5185, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5229, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5258, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5219, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5203, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5236, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5255, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5238, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5241, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5229, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5226, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5214, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5213, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5232, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5246, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5217, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5229, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5236, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5214, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5204, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5229, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5229, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5215, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5197, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5212, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5201, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5220, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5207, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5226, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5224, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5226, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5227, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5218, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5214, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5212, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5241, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5216, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5210, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5236, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5224, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5221, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5231, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5218, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5223, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5216, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5213, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5247, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5198, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5238, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5237, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5218, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5208, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5241, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.5220, device='cuda:0', grad_fn=<MeanBackward0>)
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 218, in <module>
+    for batch in finger_dl_train: # training data loop
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 757, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 128, in __getitem__
+    img = self.transform(img)
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_container.py", line 51, in forward
+    outputs = transform(*inputs)
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_transform.py", line 46, in forward
+    params = self._get_params(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_geometry.py", line 621, in _get_params
+    def _get_params(self, flat_inputs: List[Any]) -> Dict[str, Any]:
+
+KeyboardInterrupt

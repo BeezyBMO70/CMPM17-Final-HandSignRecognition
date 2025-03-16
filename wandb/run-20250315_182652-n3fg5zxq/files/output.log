@@ -1,0 +1,8 @@
+Using device: cuda
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 75, in <module>
+    v2.Normalize(mean[0.5], std=[0.5]),
+                 ^^^^
+NameError: name 'mean' is not defined

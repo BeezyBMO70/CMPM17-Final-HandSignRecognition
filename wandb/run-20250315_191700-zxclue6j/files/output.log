@@ -1,0 +1,22 @@
+training in progress...
+starting new batching
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 237, in <module>
+    for batch in finger_dl_train: # training data loop
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 757, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 126, in __getitem__
+    img = Image.open(self.features[index])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\PIL\Image.py", line 3247, in open
+    fp = builtins.open(filename, "rb")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'Fingers_ReducedDataset_3839\\17dab64d-e650-496d-ad3a-2c75d970f820_3R.png'

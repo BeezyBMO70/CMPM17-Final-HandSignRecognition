@@ -1,0 +1,31 @@
+training in progress...
+starting new batching
+Epoch 1, Train Accuracy: 8.1968% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 2, Train Accuracy: 7.9683% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 3, Train Accuracy: 7.9810% , Validation Accuracy: 8.1550%
+starting new batching
+Epoch 4, Train Accuracy: 8.3302% , Validation Accuracy: 8.1860%
+starting new batching
+Epoch 5, Train Accuracy: 8.1079% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 6, Train Accuracy: 8.2730% , Validation Accuracy: 8.1860%
+starting new batching
+Epoch 7, Train Accuracy: 7.9556% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 8, Train Accuracy: 8.3175% , Validation Accuracy: 8.0000%
+starting new batching
+Epoch 9, Train Accuracy: 8.2857% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 10, Train Accuracy: 8.3175% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 11, Train Accuracy: 8.0508% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 12, Train Accuracy: 8.0889% , Validation Accuracy: 7.9070%
+starting new batching
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 248, in <module>
+    train_loss += loss.item()
+                  ^^^^^^^^^^^
+KeyboardInterrupt

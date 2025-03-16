@@ -1,0 +1,65 @@
+Using device: cuda
+C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+training in progress...
+starting new batching
+Epoch 1, Train Accuracy: 8.0635% , Validation Accuracy: 8.2171%
+starting new batching
+Epoch 2, Train Accuracy: 8.2286% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 3, Train Accuracy: 8.2349% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 4, Train Accuracy: 7.8413% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 5, Train Accuracy: 8.1143% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 6, Train Accuracy: 8.2222% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 7, Train Accuracy: 8.1778% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 8, Train Accuracy: 8.2032% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 9, Train Accuracy: 8.2476% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 10, Train Accuracy: 8.4698% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 11, Train Accuracy: 8.3048% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 12, Train Accuracy: 8.1841% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 13, Train Accuracy: 8.2984% , Validation Accuracy: 7.9070%
+starting new batching
+Epoch 14, Train Accuracy: 7.8159% , Validation Accuracy: 7.9070%
+starting new batching
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 190, in <module>
+    for batch in finger_dl_train: # training data loop
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 757, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 101, in __getitem__
+    img = test_transform(img) #testing images still needs to be a tensor
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_container.py", line 51, in forward
+    outputs = transform(*inputs)
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1740, in _call_impl
+    def _call_impl(self, *args, **kwargs):
+
+KeyboardInterrupt

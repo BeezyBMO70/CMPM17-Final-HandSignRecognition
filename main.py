@@ -12,10 +12,10 @@ import os #added in order to allow us to open our local image folder
 import re # regex my beloved -  READ ME - let me know if you want me to explain whats going on with this library
 import wandb
 import torch.nn.functional as F
+import torch.optim as optim
 
 images = os.listdir("Fingers")
 labels = [] # a list that will contain all of the labels of our inputs by index. i might run into trouble when I have to put this into the dataloader but I will think of a solution when i get there
-run = wandb.init(project="Hand Detector CMPM17 Final", name="model_with_accuracy2")
 
 # Check if CUDA (GPU) is available; otherwise, use CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -72,6 +72,7 @@ validation_labels = data[18375:]
 #transform sequences
 finger_transforms = v2.Compose([
     v2.ToTensor(),
+    v2.Normalize(mean=[0.5], std=[0.5]),
     #helps to generalize hand size/positioning
     v2.RandomRotation(degrees=[-180, 180]),
     v2.RandomPerspective(distortion_scale=0.5, p=0.8),
@@ -130,7 +131,7 @@ class FingerData(Dataset):
             img = test_transform(img) #testing images still needs to be a tensor
         return (img, label) #returns augmented image and the corresponding label
     
-filters = 32
+#filters = 32
 
 class MyModel(nn.Module): #our ml model class, inherits from some class idk the specifics of :3
 
@@ -139,15 +140,23 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
         self.activation = nn.Sigmoid() 
         self.activation2 = nn.ReLU() 
         self.softmax = nn.Softmax()
+        self.dropout = nn.Dropout(p=0.3)
         self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.layer1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
-        self.layer2 = nn.Conv2d(32,64, kernel_size=3, padding=1)
-        self.layer3 = nn.Conv2d(64,64, kernel_size=3, padding=1) #2 layers are NOT enough for what we are trying to do
-        self.layer4 = nn.Conv2d(64,64, kernel_size=3, padding=1)
-        self.layer9 = nn.Linear(16384,2048)
-        self.layer10 = nn.Linear(2048,1024)
-        self.layer11 = nn.Linear(1024,512)
-        self.layer12 = nn.Linear(512,12)
+        self.layer1 = nn.Conv2d(in_channels=1, out_channels=10, kernel_size=5, padding=2)
+        self.layer2 = nn.Conv2d(in_channels=10,out_channels=50, kernel_size=5, padding=2)
+        self.layer3 = nn.Conv2d(in_channels=50,out_channels=100, kernel_size=5, padding= 2)
+        self.layer4 = nn.Conv2d(in_channels=100,out_channels=200, kernel_size=5, padding=2) 
+        self.layer5 = nn.Conv2d(in_channels=200,out_channels=300, kernel_size=5, padding=2) 
+        self.layer6 = nn.Conv2d(in_channels=300,out_channels=100, kernel_size=5, padding=2) 
+
+        # This is the linear layer which we would later use after flattening our convolution layers at the end
+        self.linearlayer1 = nn.Linear(25600, 4096)
+        self.linearlayer2 = nn.Linear(4096, 2048)
+        self.linearlayer3 = nn.Linear(2048, 1024)
+        self.linearlayer4 = nn.Linear(1024, 512)
+        self.linearlayer5 = nn.Linear(512, 256)
+        self.linearlayer6 = nn.Linear(256, 12)
+
     
     def forward(self, input):
         partial = self.layer1(input)
@@ -161,14 +170,25 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
         partial = self.layer4(partial)
         partial = self.activation2(partial)
         partial = self.maxpool(partial)
+        partial = self.layer5(partial)
+        partial = self.activation2(partial)
+        partial = self.layer6(partial)
+        partial = self.activation2(partial)
         partial  = torch.flatten(partial, start_dim=1)
-        partial = self.layer9(partial)
+        partial = self.linearlayer1(partial)
         partial = self.activation2(partial)
-        partial = self.layer10(partial)
+        partial = self.dropout(partial)
+        partial = self.linearlayer2(partial)
         partial = self.activation2(partial)
-        partial = self.layer11(partial)
+        partial = self.linearlayer3(partial)
         partial = self.activation2(partial)
-        output = self.layer12(partial)
+        partial = self.dropout(partial)
+        partial = self.linearlayer4(partial)
+        partial = self.activation2(partial)
+        partial = self.linearlayer5(partial)
+        partial = self.activation2(partial)
+        output = self.linearlayer6(partial)
+
         #output = self.softmax(output)
         return output # returns output 
     
@@ -191,7 +211,8 @@ model = MyModel().to(device)
 #loss fn/optimizer initalization
 
 lossfn = FocalLoss(alpha=0.25, gamma=2.0)
-optimizer = torch.optim.Adam(model.parameters(), lr=.001, weight_decay=.001)
+optimizer = torch.optim.Adam(model.parameters(), lr=.005, weight_decay=.001)
+scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.90)
 
 #Used to observe augmented/test images
 
@@ -207,7 +228,7 @@ for batch in finger_dl_train:
         plt.show()
 '''
 
-
+run = wandb.init(project="Hand Detector CMPM17 Final", name="model_with_focalLoss_morecomplexmodel")
 print("training in progress...")
 for epoch in range(20):
     model.train()
@@ -222,7 +243,7 @@ for epoch in range(20):
         pred = model(images)
         #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels.shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
         loss = lossfn(pred, labels)
-        print(loss)
+        #print(loss)
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
@@ -235,6 +256,7 @@ for epoch in range(20):
     #end batch, calculate testing loss + accuracy
     avg_train_loss = train_loss/len(finger_dl_train)
     train_accuracy = train_correct/train_total*100
+    scheduler.step() #update the learning rate decay
 
     #validation loop
     val_loss = 0.0
@@ -263,7 +285,7 @@ for epoch in range(20):
 print("final loss for training model:", loss)
 
 #testing data loop
-for epoch in range(20):
+for epoch in range(40):
     model.eval()
     test_loss = 0.0
     test_correct = 0.0
