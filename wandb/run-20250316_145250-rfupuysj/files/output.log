@@ -1,0 +1,77 @@
+training in progress...
+starting new batching
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+Epoch 1, Train Accuracy: 16.6730% , Validation Accuracy: 16.3721%
+starting new batching
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 213, in <module>
+    for batch in finger_dl_train: # training data loop
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 757, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 129, in __getitem__
+    img = self.transform(img)
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_container.py", line 51, in forward
+    outputs = transform(*inputs)
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_transform.py", line 51, in forward
+    self._transform(inpt, params) if needs_transform else inpt
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_geometry.py", line 627, in _transform
+    return self._call_kernel(
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\_transform.py", line 35, in _call_kernel
+    return kernel(inpt, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\functional\_geometry.py", line 1038, in rotate_image
+    grid = _affine_grid(theta, w=input_width, h=input_height, ow=output_width, oh=output_height)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torchvision\transforms\v2\functional\_geometry.py", line 691, in _affine_grid
+    x_grid = torch.linspace((1.0 - ow) * 0.5, (ow - 1.0) * 0.5, steps=ow, device=device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

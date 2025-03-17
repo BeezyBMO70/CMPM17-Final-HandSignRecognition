@@ -1,0 +1,7 @@
+training in progress...
+starting new batching
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 233, in <module>
+    train_correct += (pred_fingers == labels).sum().item()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

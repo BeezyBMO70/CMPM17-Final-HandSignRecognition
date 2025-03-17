@@ -1,0 +1,45 @@
+training in progress...
+starting new batching
+Epoch 1, Train Accuracy: 57.9810% , Validation Accuracy: 72.5581%
+starting new batching
+Epoch 2, Train Accuracy: 69.4540% , Validation Accuracy: 71.4109%
+starting new batching
+Epoch 3, Train Accuracy: 72.2984% , Validation Accuracy: 72.9302%
+starting new batching
+Epoch 4, Train Accuracy: 73.3397% , Validation Accuracy: 69.3333%
+starting new batching
+Epoch 5, Train Accuracy: 74.7746% , Validation Accuracy: 80.2481%
+starting new batching
+Epoch 6, Train Accuracy: 76.4317% , Validation Accuracy: 84.2171%
+starting new batching
+Epoch 7, Train Accuracy: 77.7143% , Validation Accuracy: 76.8062%
+starting new batching
+Epoch 8, Train Accuracy: 79.0476% , Validation Accuracy: 82.8527%
+starting new batching
+Epoch 9, Train Accuracy: 80.0063% , Validation Accuracy: 85.5504%
+starting new batching
+Epoch 10, Train Accuracy: 83.0286% , Validation Accuracy: 75.5039%
+starting new batching
+Epoch 11, Train Accuracy: 84.0698% , Validation Accuracy: 84.3721%
+starting new batching
+Epoch 12, Train Accuracy: 84.5206% , Validation Accuracy: 68.5271%
+starting new batching
+Epoch 13, Train Accuracy: 85.3143% , Validation Accuracy: 71.6279%
+starting new batching
+Epoch 14, Train Accuracy: 86.6730% , Validation Accuracy: 74.6667%
+starting new batching
+Epoch 15, Train Accuracy: 85.8222% , Validation Accuracy: 72.3411%
+starting new batching
+Epoch 16, Train Accuracy: 86.5524% , Validation Accuracy: 71.4109%
+starting new batching
+Epoch 17, Train Accuracy: 87.4032% , Validation Accuracy: 78.2326%
+starting new batching
+Epoch 18, Train Accuracy: 88.7048% , Validation Accuracy: 73.0853%
+starting new batching
+Epoch 19, Train Accuracy: 87.6063% , Validation Accuracy: 68.7752%
+starting new batching
+Epoch 20, Train Accuracy: 88.7175% , Validation Accuracy: 71.0698%
+final loss for training model: tensor(1.1894, device='cuda:0')
+starting new batching for testing. epoch:  1
+Epoch 1, Test Accuracy: 74.5524%
+model finished running! congrats on waiting this long

@@ -1,0 +1,83 @@
+training in progress...
+starting new batching
+Epoch 1, Train Accuracy: 18.9397% , Validation Accuracy: 16.6822%
+starting new batching
+Epoch 2, Train Accuracy: 21.7460% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 3, Train Accuracy: 23.9238% , Validation Accuracy: 16.1240%
+starting new batching
+Epoch 4, Train Accuracy: 25.9937% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 5, Train Accuracy: 27.4794% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 6, Train Accuracy: 27.5238% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 7, Train Accuracy: 27.4857% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 8, Train Accuracy: 27.6317% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 9, Train Accuracy: 28.6984% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 10, Train Accuracy: 28.0698% , Validation Accuracy: 16.0930%
+starting new batching
+Epoch 11, Train Accuracy: 29.4159% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 12, Train Accuracy: 30.8635% , Validation Accuracy: 15.9690%
+starting new batching
+Epoch 13, Train Accuracy: 38.6476% , Validation Accuracy: 17.0853%
+starting new batching
+Epoch 14, Train Accuracy: 44.4508% , Validation Accuracy: 17.5814%
+starting new batching
+Epoch 15, Train Accuracy: 46.4698% , Validation Accuracy: 17.0853%
+starting new batching
+Epoch 16, Train Accuracy: 45.6508% , Validation Accuracy: 17.3333%
+starting new batching
+Epoch 17, Train Accuracy: 45.4349% , Validation Accuracy: 16.8992%
+starting new batching
+Epoch 18, Train Accuracy: 47.1619% , Validation Accuracy: 16.8992%
+starting new batching
+Epoch 19, Train Accuracy: 47.8667% , Validation Accuracy: 16.8992%
+starting new batching
+Epoch 20, Train Accuracy: 48.4889% , Validation Accuracy: 16.8992%
+final loss for training model: tensor(0.6512, device='cuda:0')
+starting new batching for testing. epoch:  1
+Epoch 1, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  2
+Epoch 2, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  3
+Epoch 3, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  4
+Epoch 4, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  5
+Epoch 5, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  6
+Epoch 6, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  7
+Epoch 7, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  8
+Epoch 8, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  9
+Epoch 9, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  10
+Epoch 10, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  11
+Epoch 11, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  12
+Epoch 12, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  13
+Epoch 13, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  14
+Epoch 14, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  15
+Epoch 15, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  16
+Epoch 16, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  17
+Epoch 17, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  18
+Epoch 18, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  19
+Epoch 19, Test Accuracy: 16.3429%
+starting new batching for testing. epoch:  20
+Epoch 20, Test Accuracy: 16.3429%
+model finished running! congrats on waiting this long

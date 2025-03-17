@@ -1,0 +1,50 @@
+training in progress...
+starting new batching
+tensor(1.7573, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7813, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7769, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7265, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.8078, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7362, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.8406, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7957, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7002, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7518, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.8250, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7018, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7113, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.6802, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7881, device='cuda:0', grad_fn=<NllLossBackward0>)
+Epoch 1, Train Accuracy: 16.9587% , Validation Accuracy: 16.8992%
+starting new batching
+tensor(1.8414, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.8761, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.8775, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.9305, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.9044, device='cuda:0', grad_fn=<NllLossBackward0>)
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 218, in <module>
+    loss = lossfn(pred, labels)
+           ^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 156, in forward
+    partial = self.layer1(input)
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\conv.py", line 554, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\conv.py", line 549, in _conv_forward
+    return F.conv2d(
+           ^^^^^^^^^
+KeyboardInterrupt

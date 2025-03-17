@@ -1,0 +1,19 @@
+training in progress...
+starting new batching
+tensor(1.7918, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7918, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7918, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7918, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7918, device='cuda:0', grad_fn=<NllLossBackward0>)
+tensor(1.7918, device='cuda:0', grad_fn=<NllLossBackward0>)
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 223, in <module>
+    loss.backward()
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\autograd\__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\autograd\graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

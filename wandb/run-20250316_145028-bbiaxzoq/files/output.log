@@ -1,0 +1,62 @@
+training in progress...
+starting new batching
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+tensor(0.3111, device='cuda:0', grad_fn=<MeanBackward0>)
+Traceback (most recent call last):
+  File "c:\Users\evche\OneDrive\Desktop\UCSC_Freshman\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 213, in <module>
+    for batch in finger_dl_train: # training data loop
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\dataloader.py", line 757, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\fetch.py", line 55, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\collate.py", line 398, in default_collate
+    return collate(batch, collate_fn_map=default_collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\collate.py", line 212, in collate
+    collate(samples, collate_fn_map=collate_fn_map)
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\collate.py", line 155, in collate
+    return collate_fn_map[elem_type](batch, collate_fn_map=collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\collate.py", line 266, in collate_tensor_fn
+    if torch.utils.data.get_worker_info() is not None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\evche\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\utils\data\_utils\worker.py", line 103, in get_worker_info
+    def get_worker_info() -> Optional[WorkerInfo]:
+
+KeyboardInterrupt

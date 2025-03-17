@@ -24,35 +24,36 @@ print(f"Using device: {device}")  # Debugging to confirm GPU usage
 
 for image in images:
     if re.search("_0R", image): #possibly the most INEFFECIENT solution possible but i might think of something better if i wish upon a shooting star
-        labels.append("RH - 0")
+        labels.append("0")
     elif re.search("_1R", image):
-        labels.append("RH - 1 ")
+        labels.append("1")
     elif re.search("_2R", image):
-        labels.append("RH - 2")
+        labels.append("2")
     elif re.search("_3R", image):
-        labels.append("RH - 3")
+        labels.append("3")
     elif re.search("_4R", image):
-        labels.append("RH - 4")
+        labels.append("4")
     elif re.search("_5R", image):
-        labels.append("RH - 5")
+        labels.append("5")
     elif re.search("_0L", image):
-        labels.append("LH - 0")
+        labels.append("0")
     elif re.search("_1L", image):
-        labels.append("LH - 1")
+        labels.append("1")
     elif re.search("_2L", image):
-        labels.append("LH - 2")
+        labels.append("2")
     elif re.search("_3L", image):
-        labels.append("LH - 3")
+        labels.append("3")
     elif re.search("_4L", image):
-        labels.append("LH - 4")
+        labels.append("4")
     elif re.search("_5L", image):
-        labels.append("LH - 5")
+        labels.append("5")
     else:
         labels.append("third more sinister option") #this shouldnt be returned. if you see it something is wrong :(
-
 values = {"vals":labels} #this is just a formatting thing so i can one hot encode the labels
 df = pd.DataFrame(values, list(range(0,len(labels)))) # making this into a dataframe. i am so goated
 df = pd.get_dummies(df, columns=["vals"]) #one hot encoding the column
+
+
 dfa = df.to_numpy(dtype='float64') #i did this to make all values floats before putting it into a tensor
 data = torch.tensor(dfa, dtype=torch.float) #become a tensor now
 
@@ -74,7 +75,7 @@ finger_transforms = v2.Compose([
     v2.ToTensor(),
     v2.Normalize(mean=[0.5], std=[0.5]),
     #helps to generalize hand size/positioning
-    v2.RandomRotation(degrees=[-180, 180]),
+    v2.RandomRotation(degrees=[-30, 30]),
     v2.RandomPerspective(distortion_scale=0.5, p=0.8),
     v2.RandomApply([v2.RandomAffine(degrees=[0,0],translate=(0.1,0.1),scale=(0.9,1.5))], p=0.8),
     #helps to minimize background noise and lead the model to focus on the hand details
@@ -137,58 +138,45 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
 
     def __init__(self):
         super().__init__()
-        self.activation = nn.Sigmoid() 
-        self.activation2 = nn.ReLU() 
+        self.activation = nn.ReLU() 
         self.softmax = nn.Softmax()
-        self.dropout = nn.Dropout(p=0.3)
+        self.dropout = nn.Dropout(p=0.5)
         self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
         self.layer1 = nn.Conv2d(in_channels=1, out_channels=10, kernel_size=5, padding=2)
-        self.layer2 = nn.Conv2d(in_channels=10,out_channels=50, kernel_size=5, padding=2)
-        self.layer3 = nn.Conv2d(in_channels=50,out_channels=100, kernel_size=5, padding= 2)
-        self.layer4 = nn.Conv2d(in_channels=100,out_channels=200, kernel_size=5, padding=2) 
-        self.layer5 = nn.Conv2d(in_channels=200,out_channels=300, kernel_size=5, padding=2) 
-        self.layer6 = nn.Conv2d(in_channels=300,out_channels=100, kernel_size=5, padding=2) 
+        self.bn1 = nn.BatchNorm2d(10)
+        self.layer2 = nn.Conv2d(in_channels=10,out_channels=20, kernel_size=5, padding=2)
+        self.bn2 = nn.BatchNorm2d(20)
+        self.layer3 = nn.Conv2d(in_channels=20,out_channels=50, kernel_size=5, padding=2)
+        self.bn3 = nn.BatchNorm2d(50)
+        self.layer4 = nn.Conv2d(in_channels=50,out_channels=100, kernel_size=5, padding=2)
+
 
         # This is the linear layer which we would later use after flattening our convolution layers at the end
-        self.linearlayer1 = nn.Linear(25600, 4096)
-        self.linearlayer2 = nn.Linear(4096, 2048)
-        self.linearlayer3 = nn.Linear(2048, 1024)
-        self.linearlayer4 = nn.Linear(1024, 512)
-        self.linearlayer5 = nn.Linear(512, 256)
-        self.linearlayer6 = nn.Linear(256, 12)
+        self.linearlayer1 = nn.Linear(51200, 4048)
+        self.bn_1 = nn.BatchNorm1d(4048)
+        self.linearlayer2 = nn.Linear(4048, 512)
+        self.bn_2 = nn.BatchNorm1d(512)
+        self.linearlayer3 = nn.Linear(512, 6)
+
 
     
     def forward(self, input):
-        partial = self.layer1(input)
-        partial = self.activation2(partial) 
-        partial = self.layer2(partial)
-        partial = self.activation2(partial)
+        partial = self.bn1(self.layer1(input))
+        partial = self.activation(partial)
+        partial = self.bn2(self.layer2(partial))
+        partial = self.maxpool(partial) 
+        partial = self.activation(partial)
+        partial = self.bn3(self.layer3(partial))
         partial = self.maxpool(partial)
-        partial = self.layer3(partial)
-        partial = self.activation2(partial)
-        partial = self.maxpool(partial)
-        partial = self.layer4(partial)
-        partial = self.activation2(partial)
-        partial = self.maxpool(partial)
-        partial = self.layer5(partial)
-        partial = self.activation2(partial)
-        partial = self.layer6(partial)
-        partial = self.activation2(partial)
+        partial = self.activation(partial)
         partial  = torch.flatten(partial, start_dim=1)
-        partial = self.linearlayer1(partial)
-        partial = self.activation2(partial)
+        partial = self.bn_1(self.linearlayer1(partial))
         partial = self.dropout(partial)
-        partial = self.linearlayer2(partial)
-        partial = self.activation2(partial)
-        partial = self.linearlayer3(partial)
-        partial = self.activation2(partial)
+        partial = self.activation(partial)
+        partial = self.bn_2(self.linearlayer2(partial))
         partial = self.dropout(partial)
-        partial = self.linearlayer4(partial)
-        partial = self.activation2(partial)
-        partial = self.linearlayer5(partial)
-        partial = self.activation2(partial)
-        output = self.linearlayer6(partial)
-
+        partial = self.activation(partial)
+        output = self.linearlayer3(partial)
         #output = self.softmax(output)
         return output # returns output 
     
@@ -210,9 +198,9 @@ model = MyModel().to(device)
 
 #loss fn/optimizer initalization
 
-lossfn = FocalLoss(alpha=0.25, gamma=2.0)
-optimizer = torch.optim.Adam(model.parameters(), lr=.005, weight_decay=.001)
-scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.90)
+lossfn = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=.002, weight_decay=.004)
+scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.95)
 
 #Used to observe augmented/test images
 
@@ -228,7 +216,7 @@ for batch in finger_dl_train:
         plt.show()
 '''
 
-run = wandb.init(project="Hand Detector CMPM17 Final", name="model_with_focalLoss_morecomplexmodel")
+run = wandb.init(project="Hand Detector CMPM17 Final", name="working_model_batchNorm")
 print("training in progress...")
 for epoch in range(20):
     model.train()
@@ -241,9 +229,11 @@ for epoch in range(20):
         images, labels = images.to(device), labels.to(device)
         labels = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
         pred = model(images)
+        #prints out number of predictions per class
+        #v = torch.argmax(pred, dim=1)
+        #print(torch.bincount(v))
         #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels.shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
         loss = lossfn(pred, labels)
-        #print(loss)
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
@@ -285,7 +275,7 @@ for epoch in range(20):
 print("final loss for training model:", loss)
 
 #testing data loop
-for epoch in range(40):
+for epoch in range(1):
     model.eval()
     test_loss = 0.0
     test_correct = 0.0
