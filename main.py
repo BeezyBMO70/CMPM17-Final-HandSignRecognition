@@ -140,7 +140,7 @@ class MyModel(nn.Module): #our ml model class, inherits from some class idk the 
         super().__init__()
         self.activation = nn.ReLU() 
         self.softmax = nn.Softmax()
-        self.dropout = nn.Dropout(p=0.5)
+        self.dropout = nn.Dropout(p=0.6)
         self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
         self.layer1 = nn.Conv2d(in_channels=1, out_channels=10, kernel_size=5, padding=2)
         self.bn1 = nn.BatchNorm2d(10)
@@ -199,8 +199,8 @@ model = MyModel().to(device)
 #loss fn/optimizer initalization
 
 lossfn = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=.002, weight_decay=.004)
-scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.95)
+optimizer = torch.optim.Adam(model.parameters(), lr=.0005, weight_decay=.003)
+scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.98)
 
 #Used to observe augmented/test images
 
@@ -215,89 +215,91 @@ for batch in finger_dl_train:
         plt.axis("off")
         plt.show()
 '''
-
-run = wandb.init(project="Hand Detector CMPM17 Final", name="working_model_batchNorm")
-print("training in progress...")
-for epoch in range(20):
-    model.train()
-    train_loss = 0.0
-    train_correct = 0.0
-    train_total = 0.0
-    print("starting new batching")
-    for batch in finger_dl_train: # training data loop
-        images, labels = batch
-        images, labels = images.to(device), labels.to(device)
-        labels = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
-        pred = model(images)
-        #prints out number of predictions per class
-        #v = torch.argmax(pred, dim=1)
-        #print(torch.bincount(v))
-        #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels.shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
-        loss = lossfn(pred, labels)
-        loss.backward()
-        optimizer.step()
-        optimizer.zero_grad()
-        train_loss += loss.item()
-        #calculating accuracy
-        pred_fingers = torch.argmax(pred, dim=1)
-        train_correct += (pred_fingers == labels).sum().item()
-        train_total += labels.size(0)
-
-    #end batch, calculate testing loss + accuracy
-    avg_train_loss = train_loss/len(finger_dl_train)
-    train_accuracy = train_correct/train_total*100
-    scheduler.step() #update the learning rate decay
-
-    #validation loop
-    val_loss = 0.0
-    val_correct = 0.0
-    val_total = 0.0 
-    with torch.no_grad():
-        for images, labels in finger_dl_val:
+if __name__ == "__main__":
+    run = wandb.init(project="Hand Detector CMPM17 Final", name="working_model_yay")
+    print("training in progress...")
+    for epoch in range(30):
+        model.train()
+        train_loss = 0.0
+        train_correct = 0.0
+        train_total = 0.0
+        print("starting new batching")
+        for batch in finger_dl_train: # training data loop
+            images, labels = batch
             images, labels = images.to(device), labels.to(device)
-            labels=labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
-            val_pred=model(images)
-            loss = lossfn(val_pred, labels)
-            val_loss += loss.item()
+            labels = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
+            pred = model(images)
+            #prints out number of predictions per class
+            #v = torch.argmax(pred, dim=1)
+            #print(torch.bincount(v))
+            #print("IMAGE TENSOR: " + str(pred.shape) + ", LABEL TENSOR: " + str(labels.shape)) #we could print the actual values for each by just dropping the .shape at the end of each image and label, but this is nicer in the terminal for now
+            loss = lossfn(pred, labels)
+            loss.backward()
+            optimizer.step()
+            optimizer.zero_grad()
+            train_loss += loss.item()
             #calculating accuracy
-            pred_fingers_val = torch.argmax(val_pred, dim=1)
-            val_correct += (pred_fingers_val == labels).sum().item()
-            val_total += labels.size(0)
+            pred_fingers = torch.argmax(pred, dim=1)
+            train_correct += (pred_fingers == labels).sum().item()
+            train_total += labels.size(0)
 
-    #end batch, calculate validation loss + accuracy
-    avg_val_loss = val_loss/len(finger_dl_val)
-    val_accuracy = val_correct/val_total*100
-    
-    #adds a datapoint of training and validation loss, along with epoch and accuracies
-    print(f"Epoch {epoch+1}, Train Accuracy: {train_accuracy:.4f}% , Validation Accuracy: {val_accuracy:.4f}%")
-    wandb.log({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss, "train_acc":train_accuracy , "val_acc":val_accuracy})
+        #end batch, calculate testing loss + accuracy
+        avg_train_loss = train_loss/len(finger_dl_train)
+        train_accuracy = train_correct/train_total*100
+        scheduler.step() #update the learning rate decay
 
-print("final loss for training model:", loss)
+        #validation loop
+        val_loss = 0.0
+        val_correct = 0.0
+        val_total = 0.0 
+        with torch.no_grad():
+            for images, labels in finger_dl_val:
+                images, labels = images.to(device), labels.to(device)
+                labels=labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
+                val_pred=model(images)
+                loss = lossfn(val_pred, labels)
+                val_loss += loss.item()
+                #calculating accuracy
+                pred_fingers_val = torch.argmax(val_pred, dim=1)
+                val_correct += (pred_fingers_val == labels).sum().item()
+                val_total += labels.size(0)
 
-#testing data loop
-for epoch in range(1):
-    model.eval()
-    test_loss = 0.0
-    test_correct = 0.0
-    test_total = 0
-    print("starting new batching for testing. epoch: ", epoch+1)
-    for images, labels in finger_dl_test:
-        images, labels = images.to(device), labels.to(device)
-        labels = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
-        pred = model(images)
-        loss = lossfn(pred, labels)
+        #end batch, calculate validation loss + accuracy
+        avg_val_loss = val_loss/len(finger_dl_val)
+        val_accuracy = val_correct/val_total*100
         
-        test_loss += loss.item()
-        #compute accuracy
-        pred_fingers_test = torch.argmax(pred, dim=1)
-        test_correct += (pred_fingers_test == labels).sum().item()
-        test_total += labels.size(0)
+        #adds a datapoint of training and validation loss, along with epoch and accuracies
+        print(f"Epoch {epoch+1}, Train Accuracy: {train_accuracy:.4f}% , Validation Accuracy: {val_accuracy:.4f}%")
+        wandb.log({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss, "train_acc":train_accuracy , "val_acc":val_accuracy})
 
-    avg_test_loss = test_loss/len(finger_dl_test)
-    test_accuracy = test_correct/test_total*100
+    print("final loss for training model:", loss)
 
-    #records test loss + accuracy
-    print(f"Epoch {epoch + 1}, Test Accuracy: {test_accuracy:.4f}%")
-    wandb.log({"test loss": avg_test_loss, "test_acc": test_accuracy})
+    #testing data loop
+    for epoch in range(1):
+        model.eval()
+        test_loss = 0.0
+        test_correct = 0.0
+        test_total = 0
+        print("starting new batching for testing. epoch: ", epoch+1)
+        for images, labels in finger_dl_test:
+            images, labels = images.to(device), labels.to(device)
+            labels = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
+            pred = model(images)
+            loss = lossfn(pred, labels)
+            
+            test_loss += loss.item()
+            #compute accuracy
+            pred_fingers_test = torch.argmax(pred, dim=1)
+            test_correct += (pred_fingers_test == labels).sum().item()
+            test_total += labels.size(0)
 
-print("model finished running! congrats on waiting this long")
+        avg_test_loss = test_loss/len(finger_dl_test)
+        test_accuracy = test_correct/test_total*100
+
+        #records test loss + accuracy
+        print(f"Epoch {epoch + 1}, Test Accuracy: {test_accuracy:.4f}%")
+        wandb.log({"test loss": avg_test_loss, "test_acc": test_accuracy})
+
+    print("model finished running! congrats on waiting this long")
+    torch.save(model.state_dict(), "fingermodel.pth")
+    print("Model saved!")

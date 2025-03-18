@@ -1,0 +1,7 @@
+training in progress...
+starting new batching
+Traceback (most recent call last):
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 243, in <module>
+    labels[i] = labels.argmax(dim=1) #converts one hot encoded back into classification (0-11)
+    ~~~~~~^^^
+RuntimeError: The expanded size of the tensor (12) must match the existing size (64) at non-singleton dimension 0.  Target sizes: [12].  Tensor sizes: [64]

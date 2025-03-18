@@ -1,0 +1,7 @@
+{"time":"2025-03-16T14:31:10.1542908-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\brand\\OneDrive\\Documents\\CMPM17-ML\\CMPM17-Final-HandSignRecognition\\wandb\\run-20250316_143110-7jdtwrt7\\logs\\debug-core.log"}
+{"time":"2025-03-16T14:31:10.2753341-07:00","level":"INFO","msg":"created new stream","id":"7jdtwrt7"}
+{"time":"2025-03-16T14:31:10.2753341-07:00","level":"INFO","msg":"stream: started","id":"7jdtwrt7"}
+{"time":"2025-03-16T14:31:10.2758671-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"7jdtwrt7"}
+{"time":"2025-03-16T14:31:10.2758671-07:00","level":"INFO","msg":"sender: started","stream_id":"7jdtwrt7"}
+{"time":"2025-03-16T14:31:10.2758671-07:00","level":"INFO","msg":"handler: started","stream_id":"7jdtwrt7"}
+{"time":"2025-03-16T14:31:10.450373-07:00","level":"INFO","msg":"Starting system monitor"}

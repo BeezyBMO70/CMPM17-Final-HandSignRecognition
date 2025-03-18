@@ -1,0 +1,16 @@
+training in progress...
+starting new batching
+tensor([[[0.2549, 0.2510, 0.2353,  ..., 0.1961, 0.2000, 0.2039],
+         [0.2627, 0.2549, 0.2431,  ..., 0.2039, 0.2078, 0.2118],
+         [0.2745, 0.2706, 0.2627,  ..., 0.2235, 0.2275, 0.2275],
+         ...,
+         [0.1961, 0.2000, 0.2118,  ..., 0.2392, 0.2392, 0.2392],
+         [0.2000, 0.2039, 0.2118,  ..., 0.2353, 0.2392, 0.2431],
+         [0.2039, 0.2078, 0.2157,  ..., 0.2353, 0.2431, 0.2431]]])
+torch.Size([1, 128, 128])
+tensor(0.5121, grad_fn=<MeanBackward0>)
+Traceback (most recent call last):
+  File "c:\Users\brand\OneDrive\Documents\CMPM17-ML\CMPM17-Final-HandSignRecognition\main.py", line 257, in <module>
+    pred_fingers = torch.argmax(pred, dim=1)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: Dimension out of range (expected to be in range of [-1, 0], but got 1)
